@@ -9,7 +9,9 @@ interface AnimateOnScrollProps {
   animation?: 'fade-in' | 'fade-in-down' | 'slide-in-left' | 'slide-in-right' | 'zoom-in';
   delay?: number; // in ms
   threshold?: number;
+  rootMargin?: string;
   triggerOnce?: boolean;
+  initiallyVisible?: boolean;
 }
 
 export function AnimateOnScroll({
@@ -17,13 +19,30 @@ export function AnimateOnScroll({
   className,
   animation = 'fade-in',
   delay = 0,
-  threshold = 0.1,
+  threshold = 0.05,
+  rootMargin = '0px 0px -12% 0px',
   triggerOnce = true,
+  initiallyVisible = false,
 }: AnimateOnScrollProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(initiallyVisible);
 
   useEffect(() => {
+    if (initiallyVisible) {
+      return;
+    }
+
+    if (typeof window === 'undefined' || !('IntersectionObserver' in window)) {
+      setIsVisible(true);
+      return;
+    }
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+      setIsVisible(true);
+      return;
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -37,7 +56,7 @@ export function AnimateOnScroll({
           }
         });
       },
-      { threshold }
+      { threshold, rootMargin }
     );
 
     const currentRef = ref.current;
@@ -50,7 +69,7 @@ export function AnimateOnScroll({
         observer.unobserve(currentRef);
       }
     };
-  }, [threshold, triggerOnce]);
+  }, [initiallyVisible, rootMargin, threshold, triggerOnce]);
 
   const animationClasses: { [key: string]: string } = {
     'fade-in': 'animate-fade-in',
@@ -64,7 +83,7 @@ export function AnimateOnScroll({
     <div
       ref={ref}
       className={cn(
-        'transition-opacity duration-700 ease-out',
+        'transition-opacity duration-500 ease-out will-change-transform',
         isVisible ? 'opacity-100' : 'opacity-0',
         isVisible && animationClasses[animation],
         className

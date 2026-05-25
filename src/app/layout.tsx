@@ -1,9 +1,16 @@
 import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
 import './globals.css';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import { Toaster } from "@/components/ui/toaster"
 import { TopBanners } from '@/components/top-banners';
+
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-inter',
+});
 
 export const metadata: Metadata = {
   title: 'Zee VPN',
@@ -18,11 +25,18 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
+        <style>{`
+          html { background: hsl(224 71% 4%); color: hsl(210 40% 98%); }
+          body {
+            margin: 0;
+            background: hsl(224 71% 4%);
+            color: hsl(210 40% 98%);
+            font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+          }
+          a { color: inherit; text-decoration: none; }
+        `}</style>
       </head>
-      <body className="font-body antialiased bg-background text-foreground">
+      <body className={`${inter.variable} font-body antialiased bg-background text-foreground`}>
         <div className="flex flex-col min-h-screen">
           <TopBanners />
           <Header />

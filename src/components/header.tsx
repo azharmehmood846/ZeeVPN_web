@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 
 import { Logo } from '@/components/logo';
@@ -21,24 +21,6 @@ const navLinks = [
 export function Header() {
   const pathname = usePathname();
   const [isMenuOpen, setMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const isHomePage = pathname === '/';
-
-  useEffect(() => {
-    if (!isHomePage) {
-      setIsScrolled(true);
-      return;
-    }
-
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Check on initial load
-
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [isHomePage]);
 
   const NavLink = ({ href, label }: { href: string; label: string }) => (
     <Link
@@ -54,12 +36,7 @@ export function Header() {
   );
 
   return (
-    <header className={cn(
-      "sticky top-0 z-50 w-full transition-all duration-300",
-      isHomePage && !isScrolled
-        ? 'bg-transparent'
-        : 'border-b border-border/40 bg-background/95 backdrop-blur-sm'
-    )}>
+    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur-sm">
       <div className="container flex h-16 items-center">
         <Logo />
         <nav className="hidden md:flex items-center space-x-6 ml-10">

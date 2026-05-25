@@ -73,22 +73,22 @@ export default function Home() {
         <LottieBg />
         <div className="container relative">
           <div className="max-w-4xl mx-auto">
-            <AnimateOnScroll animation="fade-in-down" delay={200}>
+            <AnimateOnScroll animation="fade-in-down" delay={0} initiallyVisible>
               <Badge variant="outline" className="mb-4 border-accent/50 text-accent animate-glow [text-shadow:0_0_15px_hsl(var(--accent))]">
                 Your Secure Gateway to the Internet
               </Badge>
             </AnimateOnScroll>
-            <AnimateOnScroll animation="fade-in-down">
+            <AnimateOnScroll animation="fade-in-down" delay={80} initiallyVisible>
               <h1 className="text-4xl md:text-6xl font-bold font-headline tracking-tight text-foreground animate-glow [text-shadow:0_0_20px_hsl(var(--primary))]">
                   Experience a Safer, Unrestricted Internet
               </h1>
             </AnimateOnScroll>
-            <AnimateOnScroll animation="fade-in" delay={400}>
+            <AnimateOnScroll animation="fade-in" delay={140} initiallyVisible>
               <p className="mt-6 text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
                 Get a free 6-hour PIN to enjoy blazing-fast speeds, robust security, and complete online freedom with Zee VPN. No credit card required.
               </p>
             </AnimateOnScroll>
-            <AnimateOnScroll animation="fade-in" delay={600}>
+            <AnimateOnScroll animation="fade-in" delay={200} initiallyVisible>
               <div className="mt-10 flex justify-center gap-4">
                 <Button asChild size="lg" className="rounded-lg text-lg px-8 py-6 transition-transform duration-200 hover:scale-105 active:scale-100 shadow-lg hover:shadow-primary/40">
                   <Link href="/get-pin">Get Free 6 Hour Pin <ArrowRight className="ml-2 h-5 w-5" /></Link>
@@ -96,7 +96,7 @@ export default function Home() {
               </div>
             </AnimateOnScroll>
           </div>
-          <AnimateOnScroll animation="zoom-in" delay={800}>
+          <AnimateOnScroll animation="zoom-in" delay={260} initiallyVisible>
             <div className="mt-16 md:mt-24">
               <Image 
                   src="https://minograd.sirv.com/Group-2-1.png"
@@ -104,6 +104,8 @@ export default function Home() {
                   data-ai-hint="VPN dashboard"
                   width={514}
                   height={520}
+                  priority
+                  sizes="(max-width: 768px) 90vw, 514px"
                   className="rounded-xl shadow-2xl w-full max-w-md mx-auto"
               />
             </div>
