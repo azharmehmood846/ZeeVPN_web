@@ -18,7 +18,7 @@ export function Footer() {
         aria-hidden
       >
         <Image
-          src="/zee-vector.png"
+          src="/zee-Vector.png"
           alt=""
           width={2185}
           height={2673}
