@@ -34,22 +34,22 @@ export function HeroSection() {
             No subscription. No sign-up. Just privacy, on your terms.
           </p>
 
-          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Button
               asChild
               size="lg"
-              className="h-12 rounded-full px-8 text-base shadow-lg shadow-primary/30"
+              className="group h-12 rounded-full px-8 text-base shadow-[0_10px_32px_-8px_rgba(37,99,235,0.6)] transition-shadow duration-300 hover:shadow-[0_14px_40px_-8px_rgba(37,99,235,0.75)]"
             >
               <Link href="/download">
                 Get the App
-                <ArrowRight className="ml-2 h-4 w-4" />
+                <ArrowRight className="ml-1.5 h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
               </Link>
             </Button>
             <Button
               asChild
               size="lg"
               variant="secondary"
-              className="h-12 rounded-full border border-white/12 bg-white/[0.06] px-8 text-base text-white backdrop-blur-md hover:bg-white/10"
+              className="h-12 rounded-full border border-white/10 bg-white/[0.04] px-8 text-base text-white backdrop-blur-md transition-colors duration-300 hover:bg-white/[0.09]"
             >
               <Link href="/what-is-a-vpn">How it works</Link>
             </Button>

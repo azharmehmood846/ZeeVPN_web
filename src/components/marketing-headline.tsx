@@ -11,10 +11,9 @@ export const marketingSectionHeadlineClass =
   "text-[clamp(1.75rem,3.25vw,2.75rem)] font-bold leading-[1.1] tracking-[-0.04em]";
 
 export const marketingHeadlineGradientClass =
-  "bg-gradient-to-b from-white via-white to-white/55 bg-clip-text text-transparent";
+  "bg-gradient-to-b from-white to-white/75 bg-clip-text text-transparent";
 
-export const marketingHeadlineGradientMutedClass =
-  "bg-gradient-to-b from-white/95 via-white/80 to-white/45 bg-clip-text text-transparent";
+export const marketingHeadlineGradientMutedClass = "text-white/55";
 
 type MarketingHeadlineProps = {
   as?: "h1" | "h2" | "h3";

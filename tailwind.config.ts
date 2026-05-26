@@ -151,6 +151,11 @@ export default {
           '50%': { opacity: '0.2' },
           '100%': { transform: 'scale(1.4)', opacity: '0' },
         },
+        meteor: {
+          '0%': { transform: 'rotate(var(--angle)) translateX(0)', opacity: '1' },
+          '70%': { opacity: '1' },
+          '100%': { transform: 'rotate(var(--angle)) translateX(-500px)', opacity: '0' },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
@@ -164,6 +169,7 @@ export default {
         'ripple': 'ripple 4s ease-in-out infinite',
         'ripple-2': 'ripple-2 4s ease-in-out infinite -2s',
         'ripple-3': 'ripple-3 4s ease-in-out infinite -3s',
+        meteor: 'meteor 5s linear infinite',
       },
     },
   },

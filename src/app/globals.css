@@ -4,6 +4,15 @@
 
 body {
   font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+  font-feature-settings: 'cv11', 'ss01', 'cv02';
+  font-synthesis-weight: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
 }
 
 @layer base {
@@ -64,7 +73,6 @@ body {
 
 @layer base {
   html {
-    scroll-behavior: smooth;
     scroll-padding-top: 6rem;
   }
 
@@ -72,6 +80,20 @@ body {
     html {
       scroll-behavior: auto;
     }
+  }
+
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
   }
 
   * {
@@ -83,8 +105,43 @@ body {
   }
 
   ::selection {
-    background: hsla(217, 91%, 60%, 0.28);
+    background: hsla(217, 91%, 60%, 0.32);
     color: hsl(var(--foreground));
+  }
+}
+
+@layer components {
+  .section-eyebrow {
+    @apply inline-flex items-center gap-3 text-[11px] font-medium uppercase tracking-[0.2em] text-muted-foreground;
+  }
+  .section-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 1.75rem;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      hsl(var(--primary) / 0.6) 45%,
+      hsl(var(--primary) / 0.25) 100%
+    );
+  }
+
+  .surface-card {
+    @apply rounded-2xl border border-white/[0.06] bg-white/[0.018] transition-[border-color,background-color,transform] duration-300 ease-out;
+  }
+  .surface-card:hover {
+    @apply border-white/[0.1] bg-white/[0.03];
+  }
+
+  .hairline-divider {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      hsl(var(--border) / 0.9) 20%,
+      hsl(var(--border) / 0.9) 80%,
+      transparent 100%
+    );
   }
 }
 
