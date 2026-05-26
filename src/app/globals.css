@@ -63,11 +63,28 @@ body {
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
   * {
     @apply border-border;
   }
   body {
     @apply bg-background text-foreground;
+    background-image: linear-gradient(180deg, rgba(8, 12, 22, 1), rgba(8, 12, 22, 1));
+  }
+
+  ::selection {
+    background: hsla(217, 91%, 60%, 0.28);
+    color: hsl(var(--foreground));
   }
 }
 
@@ -75,4 +92,40 @@ body {
   .container {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
+
+  .section-body {
+    @apply text-base leading-relaxed text-muted-foreground;
+  }
+}
+
+@keyframes hero-veil-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(0, 18px, 0) scale(1.05);
+  }
+}
+
+@keyframes hero-veil-glow {
+  0%,
+  100% {
+    opacity: 0.42;
+  }
+  50% {
+    opacity: 0.72;
+  }
+}
+
+.hero-veil-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 80px 80px;
+  mask-image: radial-gradient(circle at center, rgba(0, 0, 0, 0.9), transparent 78%);
+}
+
+.hero-veil-orb {
+  animation: hero-veil-drift 11s ease-in-out infinite, hero-veil-glow 8s ease-in-out infinite;
 }

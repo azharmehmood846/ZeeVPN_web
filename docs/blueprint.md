@@ -8,7 +8,7 @@
 - App Download Tiles: Provides app platform tiles (Android/iOS/Windows/macOS/TV) with a 'Get Secured Now' call to action for each platform.
 - Blog Display: Displays a grid or list of blog posts with thumbnails, date badges, and a 'Read more' link for each post.
 - Contact Form: Presents a straightforward contact form with fields for name, phone, email, and message, along with accompanying help text, address, and social media links.
-- Free PIN eligibility evaluation: Uses an AI tool to analyze user context to determine if the user is eligible to receive a free PIN or guide them towards premium subscription options.
+- Free PIN eligibility evaluation: Uses lightweight rules on the server to determine if the user is eligible to receive a free PIN or guide them towards premium subscription options.
 
 ## Style Guidelines:
 

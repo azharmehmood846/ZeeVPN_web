@@ -1,293 +1,222 @@
-
 import Image from 'next/image';
 import Link from 'next/link';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from '@/components/ui/carousel';
-import { Button } from '@/components/ui/button';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Badge } from '@/components/ui/badge';
-import { benefits, features, testimonials, premiumTiers, blogPosts } from '@/lib/data';
-import { CheckCircle, ArrowRight, Ghost, Wifi, Rocket } from 'lucide-react';
-import { LottieBg } from '@/components/lottie-bg';
-import { RippleBg } from '@/components/ripple-bg';
+import { CheckCircle2, ChevronRight, LockKeyhole, ShieldCheck, Sparkles, Wifi, Globe2 } from 'lucide-react';
+
 import { AnimateOnScroll } from '@/components/animate-on-scroll';
+import { HeroSection } from '@/components/hero-section';
+import { MarketingHeadline } from '@/components/marketing-headline';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { CDN_IMAGES } from '@/lib/cdn-images';
+import { benefits, premiumTiers, testimonials } from '@/lib/data';
 
-const placeholderImages = {
-  hero: "https://res.cloudinary.com/dc05bhncp/image/upload/v1757679097/Group-2-1_nqgjkc.png",
-  feature1: "https://picsum.photos/seed/feature1/600/400",
-  feature2: "https://picsum.photos/seed/feature2/600/400",
-  featuresReliable: "https://res.cloudinary.com/dc05bhncp/image/upload/v1757680207/IPHONE_lkxrks.png",
-  featuresAccess: "https://minograd.sirv.com/Home%20_%20Disconnected.png",
-  featuresPremium: "https://picsum.photos/seed/feat-premium/600/600"
+const productPillars = [
+  {
+    icon: ShieldCheck,
+    title: 'One ad unlocks hours',
+    description: 'Watch a short ad at open. The tunnel runs for the rest of your session.',
+  },
+  {
+    icon: Wifi,
+    title: 'Stays up on bad WiFi',
+    description: 'Hotels, airports, and café hotspots without constant reconnect prompts.',
+  },
+  {
+    icon: Globe2,
+    title: 'Servers when you need them',
+    description: 'Pick a region in the app. Pro adds premium exits for streaming and work.',
+  },
+];
+
+const shortBenefitCopy: Record<string, string> = {
+  'Stay Anonymous Online': 'Hide your IP from sites and your ISP.',
+  'Protect Personal Data': 'Encrypt traffic on public WiFi.',
+  'Secure Public Wi-Fi': 'Stay safe on open networks in seconds.',
 };
 
-const benefitIcons: { [key: string]: React.ElementType } = {
-  'Stay Anonymous Online': (props) => (
-    <svg {...props} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M20 21c-1.25-1.25-2.97-2-5-2H9c-2.03 0-3.75.75-5 2" />
-      <path d="M12 13a4 4 0 1 0-8 0 4 4 0 0 0 8 0Z" transform="translate(4 2)" />
-      <circle cx="10" cy="9" r="1" />
-      <circle cx="14" cy="9" r="1" />
-      <path d="M4 13c0 2.21 1.79 4 4 4h8c2.21 0 4-1.79 4-4" />
-    </svg>
-  ),
-  'Protect Personal Data': (props) => (
-     <svg {...props} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-      <polyline points="14 2 14 8 20 8" />
-      <path d="M11.5 13.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
-      <path d="M11.5 13.5c0 .69-.28 1.32-.73 1.77" />
-      <path d="M14 22s-2-2-2-4 2-4 2-4" />
-      <path d="M9 13.5c0 .69.28 1.32.73 1.77" />
-      <path d="M7 22s2-2 2-4-2-4-2-4" />
-    </svg>
-  ),
-  'Secure Public Wi-Fi': (props) => (
-     <svg {...props} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin  ="round">
-      <path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z" />
-      <path d="M12 7a5 5 0 0 1 0 10" />
-      <path d="M12 10a2 2 0 0 1 0 4" />
-      <path d="M12 13h.01" />
-    </svg>
-  )
-};
+const featureRows = [
+  {
+    eyebrow: 'Connection',
+    title: 'Fast enough that you forget it is on',
+    description: 'Calls, streams, and downloads keep moving while the VPN is connected.',
+    bullets: ['Stable speed on everyday networks', 'In app gauge stays in the green'],
+    image: CDN_IMAGES.productSpeed,
+    alt: 'Zee VPN product speed view',
+  },
+  {
+    eyebrow: 'Global access',
+    title: 'Pick a server in one tap',
+    description: 'Route through the Americas, Europe, or Asia Pacific from the same Android app.',
+    bullets: ['Standard locations on free', 'Premium exits with Pro'],
+    image: CDN_IMAGES.globalServers,
+    alt: 'Zee VPN global server locations',
+  },
+];
 
 export default function Home() {
   return (
-    <div className="flex flex-col">
-      {/* Hero Section */}
-      <section className="relative w-full pt-32 pb-20 md:pt-40 md:pb-28 text-center overflow-hidden">
-        <LottieBg />
-        <div className="container relative">
-          <div className="max-w-4xl mx-auto">
-            <AnimateOnScroll animation="fade-in-down" delay={0} initiallyVisible>
-              <Badge variant="outline" className="mb-4 border-accent/50 text-accent animate-glow [text-shadow:0_0_15px_hsl(var(--accent))]">
-                Your Secure Gateway to the Internet
-              </Badge>
-            </AnimateOnScroll>
-            <AnimateOnScroll animation="fade-in-down" delay={80} initiallyVisible>
-              <h1 className="text-4xl md:text-6xl font-bold font-headline tracking-tight text-foreground animate-glow [text-shadow:0_0_20px_hsl(var(--primary))]">
-                  Experience a Safer, Unrestricted Internet
-              </h1>
-            </AnimateOnScroll>
-            <AnimateOnScroll animation="fade-in" delay={140} initiallyVisible>
-              <p className="mt-6 text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-                Get a free 6-hour PIN to enjoy blazing-fast speeds, robust security, and complete online freedom with Zee VPN. No credit card required.
-              </p>
-            </AnimateOnScroll>
-            <AnimateOnScroll animation="fade-in" delay={200} initiallyVisible>
-              <div className="mt-10 flex justify-center gap-4">
-                <Button asChild size="lg" className="rounded-lg text-lg px-8 py-6 transition-transform duration-200 hover:scale-105 active:scale-100 shadow-lg hover:shadow-primary/40">
-                  <Link href="/get-pin">Get Free 6 Hour Pin <ArrowRight className="ml-2 h-5 w-5" /></Link>
-                </Button>
-              </div>
-            </AnimateOnScroll>
-          </div>
-          <AnimateOnScroll animation="zoom-in" delay={260} initiallyVisible>
-            <div className="mt-16 md:mt-24">
-              <Image 
-                  src="https://minograd.sirv.com/Group-2-1.png"
-                  alt="Zee VPN Dashboard"
-                  data-ai-hint="VPN dashboard"
-                  width={514}
-                  height={520}
-                  priority
-                  sizes="(max-width: 768px) 90vw, 514px"
-                  className="rounded-xl shadow-2xl w-full max-w-md mx-auto"
-              />
-            </div>
-          </AnimateOnScroll>
-        </div>
-      </section>
+    <div className="relative overflow-hidden">
+      <HeroSection />
 
-      {/* Benefits Grid */}
-      <section className="py-28 bg-card/30">
+      <section className="py-20 md:py-24">
         <div className="container">
-          <AnimateOnScroll className="text-center max-w-2xl mx-auto">
-            <Badge variant="outline" className="mb-2">ADVANTAGES OF VPN 🔥</Badge>
-            <h2 className="text-3xl font-bold font-headline tracking-tight text-foreground sm:text-4xl">
-              What are The Benefits of Using a VPN?
-            </h2>
-            <p className="mt-4 text-lg text-muted-foreground">
-              Benefits of VPNs: Protect Your Privacy, Data, and Online Freedom
-            </p>
-          </AnimateOnScroll>
-          <div className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {benefits.map((benefit, index) => {
-              const Icon = benefitIcons[benefit.title] || CheckCircle;
-              return (
-                <AnimateOnScroll key={benefit.title} animation="fade-in-down" delay={index * 150}>
-                  <Card className="bg-card/50 rounded-xl text-center border-border/50 shadow-lg hover:bg-card/80 hover:shadow-primary/20 hover:border-primary/30 transition-all duration-300 group hover:-translate-y-1 h-full">
-                    <CardHeader className="p-6">
-                      <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-primary mb-6 ring-4 ring-primary/10 transition-all duration-300 group-hover:scale-110 group-hover:bg-primary group-hover:text-primary-foreground group-hover:shadow-[0_0_25px_hsl(var(--primary)/0.5)]">
-                        <Icon className="h-8 w-8" aria-hidden="true" />
-                      </div>
-                      <CardTitle className="text-xl font-bold font-headline">{benefit.title}</CardTitle>
-                    </CardHeader>
-                    <CardContent className="p-6 pt-0">
-                      <p className="text-muted-foreground">{benefit.description}</p>
-                    </CardContent>
-                  </Card>
-                </AnimateOnScroll>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Features Section */}
-      <section className="py-28 overflow-hidden">
-        <div className="container">
-          <AnimateOnScroll className="text-center max-w-3xl mx-auto">
-            <Badge variant="outline" className="mb-2 uppercase tracking-widest text-accent border-accent/50">
-              More Valuable Features <Rocket className="inline-block ml-2 h-4 w-4" />
+          <AnimateOnScroll className="mx-auto max-w-3xl text-center">
+            <Badge variant="outline" className="rounded-full border-border/70 bg-card/40 px-4 py-1 text-[11px] uppercase tracking-[0.22em]">
+              Why Zee VPN
             </Badge>
-            <h2 className="text-3xl font-bold font-headline tracking-tight text-foreground sm:text-4xl">
-              Features offered by Zee VPN
-            </h2>
-            <p className="mt-4 text-lg text-muted-foreground">
-              Discover All the Powerful Features of Zee VPN That Keep Your Data Secure, Protect Your Privacy, and Give You Unlimited Access to the Internet
+            <MarketingHeadline className="mt-5">Built for people who just want it on</MarketingHeadline>
+            <p className="section-body mt-3">
+              No signup. No monthly bill. Watch one ad and browse for hours.
             </p>
           </AnimateOnScroll>
-          
-          <div className="mt-16 grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Main Feature Card */}
-            <AnimateOnScroll className="lg:col-span-2" animation="zoom-in">
-              <Card className="bg-card/50 rounded-2xl border-border/50 shadow-2xl shadow-primary/10 overflow-hidden">
-                <div className="grid md:grid-cols-2 items-center gap-8">
-                  <div className="p-8 md:p-12">
-                      <h3 className="text-3xl font-bold font-headline">Fast and Reliable Connection</h3>
-                      <p className="mt-4 text-muted-foreground max-w-xl">
-                          Maximize Your Internet Experience with a VPN That Offers Fast and Reliable Connections, Protects Your Privacy, and Provides Unrestricted Access to the Global Web
-                      </p>
-                      <Button asChild size="lg" className="mt-8 rounded-lg">
-                          <Link href="/download">Download Zee VPN</Link>
-                      </Button>
-                  </div>
-                  <div className="flex items-center justify-center p-8">
-                      <Image
-                          src="https://minograd.sirv.com/Group%206.png"
-                          alt="VPN Speedometer UI"
-                          data-ai-hint="VPN connection speed"
-                          width={400}
-                          height={387}
-                          className="rounded-lg shadow-lg object-contain"
-                      />
-                  </div>
-                </div>
-              </Card>
-            </AnimateOnScroll>
 
-            {/* Unlimited Access Card */}
-            <AnimateOnScroll animation="slide-in-right">
-              <Card className="bg-card/50 rounded-2xl border-border/50 shadow-xl shadow-primary/5 flex flex-col h-full">
-                  <CardHeader className="p-8 text-center">
-                      <Image
-                          src="https://minograd.sirv.com/Home%20_%20Disconnected.png"
-                          alt="Unlimited Access UI"
-                          data-ai-hint="vpn disconnected"
-                          width={447}
-                          height={476}
-                          className="rounded-lg shadow-md mb-6 mx-auto"
-                      />
-                      <h3 className="text-2xl font-bold font-headline">Unlimited Access</h3>
+          <div className="mt-12 grid gap-5 lg:grid-cols-3">
+            {productPillars.map((pillar, index) => (
+              <AnimateOnScroll key={pillar.title} animation="fade-in-down" delay={index * 80}>
+                <Card className="h-full rounded-[1.75rem] border-border/60 bg-card/45 shadow-[0_16px_50px_rgba(0,0,0,0.18)]">
+                  <CardHeader className="p-6">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-primary/20 bg-primary/10 text-primary">
+                      <pillar.icon className="h-5 w-5" />
+                    </div>
+                    <CardTitle className="pt-5 text-xl font-semibold tracking-[-0.03em]">{pillar.title}</CardTitle>
                   </CardHeader>
-                  <CardContent className="p-8 pt-0 flex-grow text-center">
-                      <p className="text-muted-foreground">
-                          Get premium server access with a secure PIN generated from our website for fast and private browsing anytime.
-                      </p>
+                  <CardContent className="px-6 pb-6 pt-0 text-sm leading-relaxed text-muted-foreground">
+                    {pillar.description}
                   </CardContent>
-              </Card>
-            </AnimateOnScroll>
-
-            {/* Premium Locations Card */}
-            <AnimateOnScroll animation="slide-in-left">
-              <Card className="bg-card/50 rounded-2xl border-border/50 shadow-xl shadow-primary/5 flex flex-col h-full">
-                  <CardHeader className="p-8 text-center">
-                      <Image
-                          src="https://minograd.sirv.com/Frame%201321317475.png"
-                          alt="Premium Server Locations"
-                          data-ai-hint="vpn server locations"
-                          width={376}
-                          height={448}
-                          className="rounded-lg shadow-md mb-6 mx-auto"
-                      />
-                      <h3 className="text-2xl font-bold font-headline">Premium Locations</h3>
-                  </CardHeader>
-                  <CardContent className="p-8 pt-0 flex-grow text-center">
-                       <p className="text-muted-foreground">
-                          Access Global Premium Servers Without Paying Extra and Enjoy Seamless Online Freedom with Zee VPN
-                      </p>
-                  </CardContent>
-              </Card>
-            </AnimateOnScroll>
+                </Card>
+              </AnimateOnScroll>
+            ))}
           </div>
         </div>
       </section>
-      
-      {/* Fast and Reliable Banner */}
-      <section className="py-24 bg-primary/10">
-        <AnimateOnScroll className="container text-center" animation="zoom-in">
-            <h2 className="text-3xl font-bold font-headline tracking-tight text-primary sm:text-4xl">
-              Fast and Reliable Connection, Always.
-            </h2>
-            <p className="mt-4 text-lg text-foreground/80 max-w-3xl mx-auto">
-              Our optimized network ensures you get the best speeds possible, whether you're streaming, gaming, or browsing.
-            </p>
-        </AnimateOnScroll>
+
+      <section className="border-y border-border/60 bg-card/25 py-20 md:py-24">
+        <div className="container space-y-14">
+          {featureRows.map((row, index) => (
+            <div
+              key={row.title}
+              className="grid items-center gap-8 lg:grid-cols-[0.95fr_1.05fr]"
+            >
+              <AnimateOnScroll
+                animation={index % 2 === 0 ? 'slide-in-left' : 'slide-in-right'}
+                className={index % 2 === 1 ? 'lg:order-2' : undefined}
+              >
+                <div className="max-w-xl">
+                  <div className="text-xs font-medium uppercase tracking-[0.24em] text-primary">{row.eyebrow}</div>
+                  <MarketingHeadline as="h3" className="mt-3">
+                    {row.title}
+                  </MarketingHeadline>
+                  <p className="section-body mt-4">{row.description}</p>
+                  <ul className="mt-5 space-y-2">
+                    {row.bullets.map((bullet) => (
+                      <li key={bullet} className="flex items-start gap-2 text-sm text-muted-foreground">
+                        <ChevronRight className="mt-0.5 h-3.5 w-3.5 shrink-0 text-muted-foreground/70" />
+                        <span>{bullet}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </AnimateOnScroll>
+
+              <AnimateOnScroll
+                animation={index % 2 === 0 ? 'slide-in-right' : 'slide-in-left'}
+                className={index % 2 === 1 ? 'lg:order-1' : undefined}
+              >
+                <Image
+                  src={row.image}
+                  alt={row.alt}
+                  width={540}
+                  height={540}
+                  sizes="(max-width: 1024px) 92vw, 540px"
+                  className="mx-auto h-auto w-full max-w-lg object-contain"
+                />
+              </AnimateOnScroll>
+            </div>
+          ))}
+        </div>
       </section>
 
-      {/* Premium/Unlimited */}
-      <section id="pricing" className="py-28">
+      <section className="py-20 md:py-24">
         <div className="container">
-          <AnimateOnScroll className="text-center max-w-2xl mx-auto">
-            <h2 className="text-3xl font-bold font-headline tracking-tight text-foreground sm:text-4xl">
-              Go Unlimited with Premium
-            </h2>
-            <p className="mt-4 text-lg text-muted-foreground">
-              Unlock the full potential of Zee VPN with our premium plans.
-            </p>
+          <AnimateOnScroll className="mx-auto max-w-3xl text-center">
+            <Badge variant="outline" className="rounded-full border-border/70 bg-card/40 px-4 py-1 text-[11px] uppercase tracking-[0.22em]">
+              Privacy
+            </Badge>
+            <MarketingHeadline className="mt-5">Stay private on any network</MarketingHeadline>
           </AnimateOnScroll>
-          <div className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {premiumTiers.map((tier, index) => (
-              <AnimateOnScroll key={tier.name} animation="fade-in-down" delay={index * 150}>
-                <Card className={`rounded-xl border-border/50 flex flex-col shadow-lg h-full ${tier.featured ? 'border-primary shadow-primary/20 scale-105' : 'hover:shadow-primary/20 hover:-translate-y-2 transition-all'}`}>
-                  <CardHeader className="p-6">
-                      {tier.featured && <Badge className="w-fit bg-primary text-primary-foreground mb-2">Most Popular</Badge>}
-                      <CardTitle className="text-2xl font-bold font-headline">{tier.name}</CardTitle>
-                      <CardDescription>{tier.description}</CardDescription>
-                      <div className="mt-4">
-                          <span className="text-4xl font-bold font-headline">${tier.price}</span>
-                          <span className="text-muted-foreground">/month</span>
-                      </div>
+
+          <div className="mt-12 grid gap-5 lg:grid-cols-3">
+            {benefits.map((benefit, index) => (
+              <AnimateOnScroll key={benefit.title} animation="fade-in-down" delay={index * 80}>
+                <Card className="h-full rounded-[1.5rem] border-border/60 bg-card/40">
+                  <CardHeader className="p-6 pb-4">
+                    <CardTitle className="text-lg font-semibold tracking-[-0.02em]">{benefit.title}</CardTitle>
                   </CardHeader>
-                  <CardContent className="p-6 flex-grow">
-                    <ul className="space-y-4">
-                      {tier.features.map((feature) => (
-                        <li key={feature} className="flex items-center">
-                          <CheckCircle className="h-5 w-5 text-accent mr-3" />
+                  <CardContent className="px-6 pb-6 pt-0 text-sm leading-relaxed text-muted-foreground">
+                    {shortBenefitCopy[benefit.title] ?? benefit.description}
+                  </CardContent>
+                </Card>
+              </AnimateOnScroll>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="pricing" className="border-y border-border/60 bg-card/25 py-20 md:py-24">
+        <div className="container">
+          <AnimateOnScroll className="mx-auto max-w-3xl text-center">
+            <Badge variant="outline" className="rounded-full border-border/70 bg-card/40 px-4 py-1 text-[11px] uppercase tracking-[0.22em]">
+              Pricing
+            </Badge>
+            <MarketingHeadline className="mt-5">Free if you watch. Paid if you do not</MarketingHeadline>
+            <p className="section-body mt-3">Free runs on ads. Pro skips them and opens premium servers.</p>
+          </AnimateOnScroll>
+
+          <div className="mt-12 grid gap-5 lg:grid-cols-3">
+            {premiumTiers.map((tier, index) => (
+              <AnimateOnScroll key={tier.name} animation="fade-in-down" delay={index * 90}>
+                <Card
+                  className={`flex h-full flex-col rounded-[1.75rem] border-border/60 bg-background/70 ${
+                    tier.featured ? 'border-primary/35 shadow-[0_24px_70px_rgba(37,99,235,0.18)]' : ''
+                  }`}
+                >
+                  <CardHeader className="p-6">
+                    <div className="flex items-center justify-between gap-4">
+                      <CardTitle className="text-xl font-semibold tracking-[-0.03em]">{tier.name}</CardTitle>
+                      {tier.featured ? (
+                        <span className="rounded-full border border-primary/25 bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
+                          Recommended
+                        </span>
+                      ) : null}
+                    </div>
+                    <CardDescription className="pt-2 text-sm text-muted-foreground">
+                      {tier.description.split('.')[0]}.
+                    </CardDescription>
+                    <div className="pt-5 text-foreground">
+                      <span className="text-3xl font-semibold tracking-[-0.05em]">${tier.price}</span>
+                      <span className="ml-1 text-sm text-muted-foreground">/ month</span>
+                    </div>
+                  </CardHeader>
+                  <CardContent className="flex-grow px-6 pb-5 pt-0">
+                    <ul className="space-y-2">
+                      {tier.features.slice(0, 4).map((feature) => (
+                        <li key={feature} className="flex items-start gap-2 text-sm text-muted-foreground">
+                          <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-muted-foreground/70" />
                           <span>{feature}</span>
                         </li>
                       ))}
                     </ul>
                   </CardContent>
-                  <CardFooter className="p-6">
-                      <Button asChild size="lg" className={`w-full rounded-lg shadow-md ${tier.featured ? 'hover:shadow-primary/40' : 'bg-secondary text-secondary-foreground hover:bg-secondary/80 hover:shadow-md'}`}>
-                        <Link href="/get-pin">Get Started</Link>
-                      </Button>
+                  <CardFooter className="p-6 pt-0">
+                    <Button
+                      asChild
+                      size="lg"
+                      variant={tier.featured ? 'default' : 'secondary'}
+                      className="w-full rounded-full"
+                    >
+                      <Link href="/get-pin">{tier.featured ? 'Start With Pro' : 'Choose Plan'}</Link>
+                    </Button>
                   </CardFooter>
                 </Card>
               </AnimateOnScroll>
@@ -296,85 +225,58 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="py-28 bg-card/30">
+      <section className="py-20 md:py-24">
         <div className="container">
-          <AnimateOnScroll className="text-center max-w-2xl mx-auto">
-            <h2 className="text-3xl font-bold font-headline tracking-tight text-foreground sm:text-4xl">
-              Loved by Users Worldwide
-            </h2>
-            <p className="mt-4 text-lg text-muted-foreground">
-              Don't just take our word for it. Here's what our users have to say.
-            </p>
+          <AnimateOnScroll className="mx-auto max-w-3xl text-center">
+            <Badge variant="outline" className="rounded-full border-border/70 bg-card/40 px-4 py-1 text-[11px] uppercase tracking-[0.22em]">
+              Proof
+            </Badge>
+            <MarketingHeadline className="mt-5">People use Zee every day after one ad</MarketingHeadline>
           </AnimateOnScroll>
-          <AnimateOnScroll animation="fade-in">
-            <Carousel
-              opts={{ align: 'start', loop: true }}
-              className="w-full max-w-5xl mx-auto mt-16"
-            >
-              <CarouselContent className="-ml-4">
-                {testimonials.map((testimonial, index) => (
-                  <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3 pl-4">
-                    <div className="p-1 h-full">
-                      <Card className="flex flex-col h-full rounded-xl bg-background shadow-lg hover:shadow-primary/20 transition-shadow">
-                        <CardContent className="p-6 flex-grow">
-                          <p className="text-muted-foreground">"{testimonial.quote}"</p>
-                        </CardContent>
-                        <CardFooter className="p-6 border-t mt-auto">
-                          <div className="flex items-center">
-                            <Avatar>
-                              <AvatarImage src={testimonial.avatar} alt={testimonial.name} data-ai-hint="person face" />
-                              <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
-                            </Avatar>
-                            <div className="ml-4">
-                              <div className="font-semibold">{testimonial.name}</div>
-                              <div className="text-sm text-muted-foreground">{testimonial.handle}</div>
-                            </div>
-                          </div>
-                        </CardFooter>
-                      </Card>
-                    </div>
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-              <CarouselPrevious />
-              <CarouselNext />
-            </Carousel>
-          </AnimateOnScroll>
+
+          <div className="mt-12 grid gap-5 lg:grid-cols-2">
+            {testimonials.slice(0, 2).map((testimonial, index) => (
+              <AnimateOnScroll key={testimonial.name} animation="fade-in-down" delay={index * 70}>
+                <Card className="h-full rounded-[1.5rem] border-border/60 bg-card/40">
+                  <CardContent className="p-6">
+                    <p className="text-base leading-7 text-foreground/88">
+                      “{testimonial.quote.split('.')[0]}.”
+                    </p>
+                    <p className="mt-4 text-sm font-medium text-foreground">{testimonial.name}</p>
+                  </CardContent>
+                </Card>
+              </AnimateOnScroll>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Secondary CTA */}
-      <section className="py-28">
-        <AnimateOnScroll className="container text-center" animation="zoom-in">
-          <div className="max-w-2xl mx-auto">
-            <h2 className="text-3xl font-bold font-headline tracking-tight text-foreground sm:text-4xl">
-              Ready to Secure Your Digital Life?
-            </h2>
-            <p className="mt-4 text-lg text-muted-foreground">
-              Join millions of users who trust Zee VPN for their online security. Get your free PIN today and experience the difference.
-            </p>
-            <div className="mt-10">
-              <Button asChild size="lg" className="rounded-lg text-lg px-8 py-6 bg-accent text-accent-foreground hover:bg-accent/90 transition-transform duration-200 hover:scale-105 active:scale-100 shadow-lg hover:shadow-accent/40">
-                <Link href="/get-pin">Try Zee VPN for Free</Link>
-              </Button>
+      <section className="pb-20 md:pb-24">
+        <div className="container">
+          <AnimateOnScroll animation="zoom-in">
+            <div className="overflow-hidden rounded-[2rem] border border-border/60 bg-[linear-gradient(180deg,rgba(16,23,42,0.88),rgba(11,18,32,0.96))] px-6 py-10 shadow-[0_24px_80px_rgba(0,0,0,0.3)] sm:px-10 sm:py-12">
+              <div className="mx-auto max-w-3xl text-center">
+                <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl border border-primary/25 bg-primary/10 text-primary">
+                  <Sparkles className="h-5 w-5" />
+                </div>
+                <MarketingHeadline className="mt-6">Install Zee. Watch one ad. Get hours</MarketingHeadline>
+                <p className="section-body mt-3">Unlimited Android VPN after a single short ad.</p>
+                <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+                  <Button asChild size="lg" className="rounded-full px-7">
+                    <Link href="/get-pin">
+                      Request Free PIN
+                      <LockKeyhole className="ml-2 h-4 w-4" />
+                    </Link>
+                  </Button>
+                  <Button asChild size="lg" variant="secondary" className="rounded-full border border-border/70 bg-secondary/60 px-7">
+                    <Link href="/what-is-a-vpn">How it works</Link>
+                  </Button>
+                </div>
+              </div>
             </div>
-          </div>
-        </AnimateOnScroll>
+          </AnimateOnScroll>
+        </div>
       </section>
-
     </div>
   );
 }
-    
-    
-
-    
-
-
-
-
-
-
-
-    

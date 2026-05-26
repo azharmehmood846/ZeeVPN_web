@@ -27,7 +27,7 @@ const steps = [
 
 export default function GetPinPage() {
     return (
-        <div className="container py-24">
+        <div className="container pb-24 pt-[calc(6rem+4.5rem)]">
             <div className="max-w-4xl mx-auto">
                 <div className="text-center">
                     <h1 className="text-4xl md:text-5xl font-bold font-headline tracking-tight">Get Your Free 6-Hour PIN</h1>

@@ -6,7 +6,7 @@ import { ArrowRight } from "lucide-react";
 
 export default function DownloadPage() {
     return (
-        <div className="container py-24">
+        <div className="container pb-24 pt-[calc(6rem+4.5rem)]">
             <div className="text-center max-w-2xl mx-auto">
                 <h1 className="text-4xl md:text-5xl font-bold font-headline tracking-tight">Download Zee VPN</h1>
                 <p className="mt-4 text-lg text-muted-foreground">

@@ -1,5 +1,7 @@
 import { Smartphone, Laptop, Tv, Apple, Bot, Ghost, ShieldCheck, Wifi } from 'lucide-react';
 
+import { CDN_IMAGES } from '@/lib/cdn-images';
+
 export const benefits = [
   {
     icon: Ghost,
@@ -23,7 +25,7 @@ export const features = [
     title: 'Fast and Reliable Connection',
     description: 'Maximize Your Internet Experience with a VPN That Offers Fast and Reliable Connections, Protects Your Privacy, and Provides Unrestricted Access to the Global Web.',
     image: {
-      src: "https://picsum.photos/seed/feat-reliable/800/600",
+      src: CDN_IMAGES.productSpeed,
       hint: "VPN connection speed"
     }
   },
@@ -31,7 +33,7 @@ export const features = [
     title: 'Unlimited Access',
     description: 'Get premium server access with a secure PIN generated from our website for fast and private browsing anytime.',
      image: {
-      src: "https://picsum.photos/seed/feat-access/600/600",
+      src: CDN_IMAGES.heroApp,
       hint: "connect vpn pin"
     }
   },
@@ -39,7 +41,7 @@ export const features = [
     title: 'Premium Locations',
     description: 'Access Global Premium Servers Without Paying Extra and Enjoy Seamless Online Freedom with Zee VPN.',
      image: {
-      src: "https://picsum.photos/seed/feat-premium/600/600",
+      src: CDN_IMAGES.globalServers,
       hint: "vpn server locations"
     }
   },

@@ -3,7 +3,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
-import { Toaster } from "@/components/ui/toaster"
+import { Toaster } from '@/components/ui/toaster';
 import { TopBanners } from '@/components/top-banners';
 
 const inter = Inter({
@@ -15,6 +15,10 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: 'Zee VPN',
   description: 'Secure, fast, and reliable VPN service.',
+  icons: {
+    icon: '/zee_logo.png',
+    apple: '/zee_logo.png',
+  },
 };
 
 export default function RootLayout({
@@ -23,10 +27,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className="dark scroll-smooth">
       <head>
         <style>{`
-          html { background: hsl(224 71% 4%); color: hsl(210 40% 98%); }
+          html {
+            background: hsl(224 71% 4%);
+            color: hsl(210 40% 98%);
+            scroll-behavior: smooth;
+            scroll-padding-top: 6rem;
+          }
           body {
             margin: 0;
             background: hsl(224 71% 4%);

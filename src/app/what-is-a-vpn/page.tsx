@@ -1,4 +1,7 @@
 import Image from 'next/image';
+
+import { CDN_IMAGES } from '@/lib/cdn-images';
+
 import { StickyNav } from './sticky-nav';
 
 const articleSections = [
@@ -10,7 +13,7 @@ const articleSections = [
 
 export default function WhatIsAVPNPage() {
   return (
-    <div className="container py-16 lg:py-24">
+    <div className="container pb-16 pt-[calc(5rem+4.5rem)] lg:pb-24 lg:pt-[calc(6rem+4.5rem)]">
       <div className="flex flex-col lg:flex-row lg:gap-12">
         <aside className="w-full lg:w-1/4 mb-8 lg:mb-0">
           <StickyNav sections={articleSections} />
@@ -22,12 +25,12 @@ export default function WhatIsAVPNPage() {
               In an era where our lives are increasingly digital, online privacy and security have never been more important. A Virtual Private Network, or VPN, is one of the most powerful tools you can use to protect your online activities.
             </p>
             <Image
-              src="https://picsum.photos/seed/what-is-vpn/800/450"
+              src={CDN_IMAGES.productSpeed}
               alt="Diagram showing how a VPN works"
               data-ai-hint="VPN explanation"
               width={800}
               height={450}
-              className="rounded-xl my-8 shadow-lg"
+              className="my-8 h-auto w-full object-contain"
             />
             <p>
               At its core, a VPN is a service that creates a secure, encrypted connection between your device (like a computer or smartphone) and the internet. This connection, often called a "tunnel," routes all your internet traffic through a server operated by the VPN provider. This process masks your real IP address and encrypts your data, making it unreadable to anyone who might try to intercept it, such as your Internet Service Provider (ISP), government agencies, or hackers on public Wi-Fi.
