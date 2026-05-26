@@ -44,6 +44,7 @@ export default function RootLayout({
             background: hsl(224 71% 4%);
             color: hsl(210 40% 98%);
             font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+            opacity: 0;
           }
           a { color: inherit; text-decoration: none; }
         `}</style>

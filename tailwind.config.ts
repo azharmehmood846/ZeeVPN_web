@@ -151,16 +151,6 @@ export default {
           '50%': { opacity: '0.2' },
           '100%': { transform: 'scale(1.4)', opacity: '0' },
         },
-        meteor: {
-          '0%': { transform: 'rotate(var(--angle)) translateX(0)', opacity: '1' },
-          '70%': { opacity: '1' },
-          '100%': { transform: 'rotate(var(--angle)) translateX(-500px)', opacity: '0' },
-        },
-        shine: {
-          '0%': { 'background-position': '0% 0%' },
-          '50%': { 'background-position': '100% 100%' },
-          '100%': { 'background-position': '0% 0%' },
-        },
         ticker: {
           '0%': { transform: 'translateX(0)' },
           '100%': { transform: 'translateX(-50%)' },
@@ -178,8 +168,6 @@ export default {
         'ripple': 'ripple 4s ease-in-out infinite',
         'ripple-2': 'ripple-2 4s ease-in-out infinite -2s',
         'ripple-3': 'ripple-3 4s ease-in-out infinite -3s',
-        meteor: 'meteor 5s linear infinite',
-        shine: 'shine var(--duration, 14s) infinite linear',
         ticker: 'ticker 40s linear infinite',
       },
     },

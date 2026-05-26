@@ -9,10 +9,11 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { CountryTicker } from '@/components/ui/country-ticker';
 import { Globe } from '@/components/ui/globe';
-import { ShineBorder } from '@/components/ui/shine-border';
 import { SpeedGauge } from '@/components/ui/speed-gauge';
 import { CDN_IMAGES } from '@/lib/cdn-images';
 import { premiumTiers, testimonials } from '@/lib/data';
+
+const SHOW_PRICING = false;
 
 const productPillars = [
   {
@@ -185,6 +186,7 @@ export default function Home() {
         <CountryTicker />
       </section>
 
+      {SHOW_PRICING ? (
       <section id="pricing" className="relative border-y border-white/[0.05] bg-white/[0.012] py-20 md:py-24">
         <div className="container">
           <AnimateOnScroll className="mx-auto max-w-3xl text-center">
@@ -241,18 +243,9 @@ export default function Home() {
                       asChild
                       size="lg"
                       variant={tier.featured ? 'default' : 'secondary'}
-                      className={`w-full rounded-full ${tier.featured ? 'relative overflow-hidden' : ''}`}
+                      className="w-full rounded-full"
                     >
-                      <Link href="/get-pin">
-                        {tier.featured ? 'Start With Pro' : 'Choose Plan'}
-                        {tier.featured ? (
-                          <ShineBorder
-                            borderWidth={1.5}
-                            duration={9}
-                            shineColor={["#FFFFFF", "#BFDBFE", "#A5B4FC"]}
-                          />
-                        ) : null}
-                      </Link>
+                      <Link href="/get-pin">{tier.featured ? 'Start With Pro' : 'Choose Plan'}</Link>
                     </Button>
                   </CardFooter>
                 </Card>
@@ -261,6 +254,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      ) : null}
 
       <section className="py-20 md:py-24">
         <div className="container">
@@ -316,15 +310,10 @@ export default function Home() {
                 <MarketingHeadline className="mt-6">Install Zee. Watch one ad. Get hours</MarketingHeadline>
                 <p className="section-body mt-3">Unlimited Android VPN after a single short ad.</p>
                 <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
-                  <Button asChild size="lg" className="relative h-12 overflow-hidden rounded-full px-7 shadow-[0_8px_28px_-6px_rgba(37,99,235,0.55)]">
+                  <Button asChild size="lg" className="h-12 rounded-full px-7 shadow-[0_8px_28px_-6px_rgba(37,99,235,0.55)]">
                     <Link href="/get-pin">
                       Request Free PIN
                       <LockKeyhole className="ml-2 h-4 w-4" />
-                      <ShineBorder
-                        borderWidth={1.5}
-                        duration={10}
-                        shineColor={["#FFFFFF", "#BFDBFE", "#A5B4FC"]}
-                      />
                     </Link>
                   </Button>
                   <Button asChild size="lg" variant="secondary" className="h-12 rounded-full border border-white/12 bg-white/[0.06] px-7 text-white backdrop-blur-md hover:bg-white/10">

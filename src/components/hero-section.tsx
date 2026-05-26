@@ -11,7 +11,6 @@ import {
 } from "@/components/marketing-headline";
 import { CDN_IMAGES } from "@/lib/cdn-images";
 import { Button } from "@/components/ui/button";
-import { ShineBorder } from "@/components/ui/shine-border";
 
 export function HeroSection() {
   return (
@@ -39,16 +38,11 @@ export function HeroSection() {
             <Button
               asChild
               size="lg"
-              className="group relative h-12 overflow-hidden rounded-full px-8 text-base shadow-[0_10px_32px_-8px_rgba(37,99,235,0.6)] transition-shadow duration-300 hover:shadow-[0_14px_40px_-8px_rgba(37,99,235,0.75)]"
+              className="group h-12 rounded-full px-8 text-base shadow-[0_10px_32px_-8px_rgba(37,99,235,0.6)] transition-shadow duration-300 hover:shadow-[0_14px_40px_-8px_rgba(37,99,235,0.75)]"
             >
               <Link href="/download">
                 Get the App
                 <ArrowRight className="ml-1.5 h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
-                <ShineBorder
-                  borderWidth={1.5}
-                  duration={10}
-                  shineColor={["#FFFFFF", "#BFDBFE", "#A5B4FC"]}
-                />
               </Link>
             </Button>
             <Button

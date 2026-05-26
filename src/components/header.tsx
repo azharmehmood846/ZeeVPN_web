@@ -17,7 +17,7 @@ const navLinks = [
   { href: '/contact', label: 'Contact' },
 ];
 
-const headerEase = 'duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)]';
+const headerEase = '[transition-duration:650ms] [transition-timing-function:cubic-bezier(0.22,1,0.36,1)]';
 
 const stickyPillStyles =
   'border border-white/10 bg-[rgba(8,12,22,0.72)] shadow-[0_0_0_1px_rgba(255,255,255,0.05),0_8px_32px_rgba(0,0,0,0.42)] backdrop-blur-xl';

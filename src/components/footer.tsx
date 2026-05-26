@@ -11,7 +11,6 @@ const socialLinks = [
 
 const productLinks = [
   { label: 'Download', href: '/download' },
-  { label: 'Pricing', href: '/#pricing' },
   { label: 'How It Works', href: '/what-is-a-vpn' },
 ];
 
