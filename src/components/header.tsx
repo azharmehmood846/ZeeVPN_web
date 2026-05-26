@@ -17,7 +17,7 @@ const navLinks = [
   { href: '/contact', label: 'Contact' },
 ];
 
-const headerEase = 'duration-500 ease-in-out';
+const headerEase = 'duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)]';
 
 const stickyPillStyles =
   'border border-white/10 bg-[rgba(8,12,22,0.72)] shadow-[0_0_0_1px_rgba(255,255,255,0.05),0_8px_32px_rgba(0,0,0,0.42)] backdrop-blur-xl';
@@ -72,13 +72,17 @@ function GetAppButton({
       href="/download"
       onClick={onClick}
       className={cn(
-        'inline-flex h-10 shrink-0 items-center justify-center gap-2 rounded-full border border-border/60 bg-secondary px-4 text-[15px] font-medium tracking-[-0.2px] text-secondary-foreground transition-[transform,box-shadow,opacity,background-color]',
+        'group inline-flex h-10 shrink-0 items-center justify-center gap-2 rounded-full border border-primary/40 bg-primary px-4 text-[15px] font-medium tracking-[-0.2px] text-primary-foreground shadow-[0_4px_14px_-4px_rgba(37,99,235,0.45)] transition-[transform,box-shadow,background-color,border-color]',
         headerEase,
-        'hover:scale-[1.02] hover:bg-secondary/90 hover:shadow-[0_8px_24px_rgba(0,0,0,0.35)] active:scale-[0.98]',
+        'hover:-translate-y-0.5 hover:border-primary/60 hover:bg-primary/92 hover:shadow-[0_12px_30px_-6px_rgba(37,99,235,0.65)] active:translate-y-0 active:scale-[0.98]',
         className
       )}
     >
-      <Smartphone className="h-[18px] w-[18px]" strokeWidth={2} aria-hidden />
+      <Smartphone
+        className="h-[18px] w-[18px] transition-transform duration-300 group-hover:-rotate-6"
+        strokeWidth={2}
+        aria-hidden
+      />
       Get App
     </Link>
   );
@@ -89,8 +93,11 @@ export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
+    const enterThreshold = 28;
+    const exitThreshold = 12;
     const onScroll = () => {
-      setIsScrolled(window.scrollY > 24);
+      const y = window.scrollY;
+      setIsScrolled((prev) => (prev ? y > exitThreshold : y > enterThreshold));
     };
 
     onScroll();
@@ -101,7 +108,7 @@ export function Header() {
   return (
     <header
       className={cn(
-        'fixed left-0 right-0 z-50 w-full bg-transparent transition-[top,padding,background-color,backdrop-filter]',
+        'fixed left-0 right-0 z-50 w-full bg-transparent [will-change:top,padding] transition-[top,padding,background-color,backdrop-filter]',
         headerEase,
         isScrolled
           ? 'top-3 px-3 sm:top-4 sm:px-4'
@@ -110,7 +117,7 @@ export function Header() {
     >
       <div
         className={cn(
-          'mx-auto flex items-center gap-3 transition-[max-width,height,padding,background-color,border-radius,box-shadow,border-color,backdrop-filter,gap]',
+          'mx-auto flex items-center gap-3 [will-change:max-width,height,padding] transition-[max-width,height,padding,background-color,border-radius,box-shadow,border-color,backdrop-filter,gap]',
           headerEase,
           isScrolled
             ? cn('h-14 max-w-[920px] rounded-full px-3 sm:px-4', stickyPillStyles)

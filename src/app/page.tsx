@@ -7,8 +7,12 @@ import { HeroSection } from '@/components/hero-section';
 import { MarketingHeadline } from '@/components/marketing-headline';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { CountryTicker } from '@/components/ui/country-ticker';
+import { Globe } from '@/components/ui/globe';
+import { ShineBorder } from '@/components/ui/shine-border';
+import { SpeedGauge } from '@/components/ui/speed-gauge';
 import { CDN_IMAGES } from '@/lib/cdn-images';
-import { benefits, premiumTiers, testimonials } from '@/lib/data';
+import { premiumTiers, testimonials } from '@/lib/data';
 
 const productPillars = [
   {
@@ -27,12 +31,6 @@ const productPillars = [
     description: 'Pick a region in the app. Pro adds premium exits for streaming and work.',
   },
 ];
-
-const shortBenefitCopy: Record<string, string> = {
-  'Stay Anonymous Online': 'Hide your IP from sites and your ISP.',
-  'Protect Personal Data': 'Encrypt traffic on public WiFi.',
-  'Secure Public Wi-Fi': 'Stay safe on open networks in seconds.',
-};
 
 const featureRows = [
   {
@@ -71,17 +69,53 @@ export default function Home() {
           <div className="mt-14 grid gap-5 lg:grid-cols-3">
             {productPillars.map((pillar, index) => (
               <AnimateOnScroll key={pillar.title} animation="fade-in-down" delay={index * 80}>
-                <Card className="group relative h-full overflow-hidden rounded-2xl border border-white/[0.06] bg-white/[0.018] transition-[border-color,background-color] duration-300 ease-out hover:border-white/[0.11] hover:bg-white/[0.032]">
-                  <CardHeader className="p-7">
-                    <span className="relative inline-flex h-9 w-9 items-center justify-center">
-                      <span className="absolute inset-0 -m-1 rounded-full bg-primary/15 blur-md" aria-hidden />
-                      <pillar.icon className="relative h-[18px] w-[18px] text-primary" strokeWidth={1.6} />
-                    </span>
-                    <CardTitle className="pt-6 text-[1.0625rem] font-semibold leading-tight tracking-[-0.02em]">{pillar.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent className="px-7 pb-7 pt-0 text-[0.9375rem] leading-relaxed text-muted-foreground">
-                    {pillar.description}
-                  </CardContent>
+                <Card className="group relative h-full overflow-hidden rounded-[1.75rem] border border-white/[0.08] bg-gradient-to-b from-white/[0.035] via-white/[0.012] to-transparent backdrop-blur-md transition-[border-color,background-color,box-shadow] duration-300 ease-out hover:border-primary/25 hover:shadow-[0_20px_50px_-20px_rgba(37,99,235,0.35)]">
+                  {/* Top inner edge highlight */}
+                  <span
+                    aria-hidden
+                    className="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                  />
+                  {/* Soft inner glow that intensifies on hover */}
+                  <span
+                    aria-hidden
+                    className="pointer-events-none absolute -top-16 left-1/2 h-40 w-56 -translate-x-1/2 rounded-full bg-primary/12 opacity-60 blur-3xl transition-opacity duration-500 group-hover:opacity-100"
+                  />
+
+                  <div className="relative flex flex-col items-center px-7 pb-10 pt-9 text-center">
+                    {/* Glassmorphic icon container */}
+                    <div className="relative h-[108px] w-[108px]">
+                      {/* Outer atmospheric halo */}
+                      <span
+                        aria-hidden
+                        className="absolute -inset-3 rounded-[1.75rem] bg-primary/18 blur-2xl"
+                      />
+                      {/* Glass surface */}
+                      <div className="relative flex h-full w-full items-center justify-center rounded-[1.5rem] border border-white/[0.14] bg-gradient-to-br from-primary/[0.22] via-primary/[0.07] to-white/[0.02] shadow-[inset_0_1px_0_rgba(255,255,255,0.18),inset_0_-1px_0_rgba(0,0,0,0.35),0_10px_30px_-10px_rgba(0,0,0,0.55)]">
+                        {/* Top-left highlight gradient (light source) */}
+                        <span
+                          aria-hidden
+                          className="absolute inset-0 rounded-[1.5rem] bg-gradient-to-br from-white/[0.14] via-transparent to-transparent"
+                        />
+                        {/* Inner faint ring */}
+                        <span
+                          aria-hidden
+                          className="absolute inset-[6px] rounded-[1.25rem] border border-white/[0.05]"
+                        />
+                        {/* Icon */}
+                        <pillar.icon
+                          className="relative h-[46px] w-[46px] text-primary drop-shadow-[0_0_14px_rgba(59,130,246,0.55)] transition-transform duration-500 ease-out group-hover:scale-110"
+                          strokeWidth={1.4}
+                        />
+                      </div>
+                    </div>
+
+                    <CardTitle className="mt-8 text-[1.125rem] font-semibold leading-snug tracking-[-0.02em] text-foreground">
+                      {pillar.title}
+                    </CardTitle>
+                    <p className="mt-3 max-w-[24ch] text-[0.9375rem] leading-relaxed text-muted-foreground">
+                      {pillar.description}
+                    </p>
+                  </div>
                 </Card>
               </AnimateOnScroll>
             ))}
@@ -89,7 +123,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="relative border-y border-white/[0.05] bg-white/[0.012] py-20 md:py-24">
+      <section className="relative py-20 md:py-24">
         <div className="container space-y-14">
           {featureRows.map((row, index) => (
             <div
@@ -121,43 +155,34 @@ export default function Home() {
                 animation={index % 2 === 0 ? 'slide-in-right' : 'slide-in-left'}
                 className={index % 2 === 1 ? 'lg:order-1' : undefined}
               >
-                <Image
-                  src={row.image}
-                  alt={row.alt}
-                  width={540}
-                  height={540}
-                  sizes="(max-width: 1024px) 92vw, 540px"
-                  className="mx-auto h-auto w-full max-w-lg object-contain"
-                />
+                {row.eyebrow === 'Global access' ? (
+                  <div className="relative mx-auto w-full max-w-lg">
+                    <span
+                      className="pointer-events-none absolute inset-0 -z-10 rounded-full bg-primary/10 blur-3xl"
+                      aria-hidden
+                    />
+                    <Globe className="max-w-lg" />
+                  </div>
+                ) : row.eyebrow === 'Connection' ? (
+                  <SpeedGauge />
+                ) : (
+                  <Image
+                    src={row.image}
+                    alt={row.alt}
+                    width={540}
+                    height={540}
+                    sizes="(max-width: 1024px) 92vw, 540px"
+                    className="mx-auto h-auto w-full max-w-lg object-contain"
+                  />
+                )}
               </AnimateOnScroll>
             </div>
           ))}
         </div>
       </section>
 
-      <section className="py-20 md:py-24">
-        <div className="container">
-          <AnimateOnScroll className="mx-auto max-w-3xl text-center">
-            <span className="section-eyebrow">Privacy</span>
-            <MarketingHeadline className="mt-5">Stay private on any network</MarketingHeadline>
-          </AnimateOnScroll>
-
-          <div className="mt-14 grid gap-5 lg:grid-cols-3">
-            {benefits.map((benefit, index) => (
-              <AnimateOnScroll key={benefit.title} animation="fade-in-down" delay={index * 80}>
-                <Card className="group relative h-full overflow-hidden rounded-2xl border border-white/[0.06] bg-white/[0.018] transition-[border-color,background-color] duration-300 ease-out hover:border-white/[0.1] hover:bg-white/[0.028]">
-                  <span className="pointer-events-none absolute left-7 top-7 h-px w-8 bg-primary/40" aria-hidden />
-                  <CardHeader className="p-7 pb-3 pt-10">
-                    <CardTitle className="text-[1.0625rem] font-semibold leading-tight tracking-[-0.02em]">{benefit.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent className="px-7 pb-7 pt-0 text-[0.9375rem] leading-relaxed text-muted-foreground">
-                    {shortBenefitCopy[benefit.title] ?? benefit.description}
-                  </CardContent>
-                </Card>
-              </AnimateOnScroll>
-            ))}
-          </div>
-        </div>
+      <section className="py-10 md:py-14">
+        <CountryTicker />
       </section>
 
       <section id="pricing" className="relative border-y border-white/[0.05] bg-white/[0.012] py-20 md:py-24">
@@ -216,9 +241,18 @@ export default function Home() {
                       asChild
                       size="lg"
                       variant={tier.featured ? 'default' : 'secondary'}
-                      className="w-full rounded-full"
+                      className={`w-full rounded-full ${tier.featured ? 'relative overflow-hidden' : ''}`}
                     >
-                      <Link href="/get-pin">{tier.featured ? 'Start With Pro' : 'Choose Plan'}</Link>
+                      <Link href="/get-pin">
+                        {tier.featured ? 'Start With Pro' : 'Choose Plan'}
+                        {tier.featured ? (
+                          <ShineBorder
+                            borderWidth={1.5}
+                            duration={9}
+                            shineColor={["#FFFFFF", "#BFDBFE", "#A5B4FC"]}
+                          />
+                        ) : null}
+                      </Link>
                     </Button>
                   </CardFooter>
                 </Card>
@@ -282,10 +316,15 @@ export default function Home() {
                 <MarketingHeadline className="mt-6">Install Zee. Watch one ad. Get hours</MarketingHeadline>
                 <p className="section-body mt-3">Unlimited Android VPN after a single short ad.</p>
                 <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
-                  <Button asChild size="lg" className="h-12 rounded-full px-7 shadow-[0_8px_28px_-6px_rgba(37,99,235,0.55)]">
+                  <Button asChild size="lg" className="relative h-12 overflow-hidden rounded-full px-7 shadow-[0_8px_28px_-6px_rgba(37,99,235,0.55)]">
                     <Link href="/get-pin">
                       Request Free PIN
                       <LockKeyhole className="ml-2 h-4 w-4" />
+                      <ShineBorder
+                        borderWidth={1.5}
+                        duration={10}
+                        shineColor={["#FFFFFF", "#BFDBFE", "#A5B4FC"]}
+                      />
                     </Link>
                   </Button>
                   <Button asChild size="lg" variant="secondary" className="h-12 rounded-full border border-white/12 bg-white/[0.06] px-7 text-white backdrop-blur-md hover:bg-white/10">

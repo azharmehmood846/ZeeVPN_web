@@ -129,7 +129,7 @@ export function Footer() {
           </p>
           <p className="inline-flex items-center gap-2">
             <span className="h-1.5 w-1.5 rounded-full bg-accent shadow-[0_0_8px_rgba(56,179,108,0.7)]" aria-hidden />
-            Designed for a quieter, more product-first landing experience.
+            All systems operational
           </p>
         </div>
       </div>
