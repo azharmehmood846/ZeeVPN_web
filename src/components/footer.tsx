@@ -39,7 +39,7 @@ function FooterLink({ label, href }: { label: string; href: string }) {
 
 export function Footer() {
   return (
-    <footer className="relative isolate overflow-hidden bg-gradient-to-t from-primary/30 via-background to-background">
+    <footer className="relative isolate overflow-hidden bg-[linear-gradient(to_top_in_oklch,hsl(var(--primary)/0.3),hsl(var(--primary)/0.12)_22%,hsl(var(--background))_55%,hsl(var(--background)))]">
       {/* Atmosphere layers */}
       <div
         className="pointer-events-none absolute -bottom-20 -right-12 z-0 opacity-[0.18] mix-blend-screen sm:-bottom-24 sm:-right-16"

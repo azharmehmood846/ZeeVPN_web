@@ -212,10 +212,10 @@ export function SpeedGauge({ className }: SpeedGaugeProps) {
     <div className={cn("relative mx-auto w-full max-w-[420px]", className)}>
       <span
         aria-hidden
-        className="pointer-events-none absolute -inset-x-8 -inset-y-10 -z-10 rounded-[3rem] bg-[radial-gradient(ellipse_at_50%_40%,rgba(59,130,246,0.22),transparent_70%)] blur-2xl"
+        className="pointer-events-none absolute -inset-x-8 -inset-y-10 -z-10 rounded-[3rem] bg-[radial-gradient(ellipse_at_50%_40%_in_oklch,rgba(59,130,246,0.22),rgba(59,130,246,0.08)_35%,transparent_70%)] blur-2xl"
       />
 
-      <div className="relative overflow-hidden rounded-[1.5rem] border border-white/[0.07] bg-[linear-gradient(180deg,rgba(14,19,30,0.96),rgba(8,11,20,0.96))] p-6 shadow-[0_20px_60px_-12px_rgba(0,0,0,0.55)] backdrop-blur-xl">
+      <div className="relative overflow-hidden rounded-[1.5rem] border border-white/[0.07] bg-[linear-gradient(180deg_in_oklch,rgba(14,19,30,0.96),rgba(11,15,25,0.96)_50%,rgba(8,11,20,0.96))] p-6 shadow-[0_20px_60px_-12px_rgba(0,0,0,0.55)] backdrop-blur-xl">
         <span
           aria-hidden
           className="pointer-events-none absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.035)_1px,transparent_1px)] [background-size:18px_18px] opacity-60"
@@ -265,9 +265,17 @@ export function SpeedGauge({ className }: SpeedGaugeProps) {
             <div className="relative">
               <svg viewBox="0 0 220 170" className="w-full" aria-hidden>
                 <defs>
-                  <linearGradient id="gauge-gradient" x1="0%" y1="50%" x2="100%" y2="50%">
-                    <stop offset="0%" stopColor="hsl(217 91% 62%)" />
-                    <stop offset="60%" stopColor="hsl(217 91% 75%)" />
+                  <linearGradient
+                    id="gauge-gradient"
+                    x1="0%"
+                    y1="50%"
+                    x2="100%"
+                    y2="50%"
+                  >
+                    <stop offset="0%" stopColor="hsl(217 91% 60%)" />
+                    <stop offset="25%" stopColor="hsl(217 91% 67%)" />
+                    <stop offset="50%" stopColor="hsl(217 91% 74%)" />
+                    <stop offset="75%" stopColor="hsl(218 95% 81%)" />
                     <stop offset="100%" stopColor="hsl(220 100% 88%)" />
                   </linearGradient>
                   <filter id="gauge-glow" x="-20%" y="-20%" width="140%" height="140%">
@@ -279,12 +287,12 @@ export function SpeedGauge({ className }: SpeedGaugeProps) {
                   </filter>
                 </defs>
 
-                {/* Background track — solid, visible enough to read as a track */}
+                {/* Background track */}
                 <path
                   d={bgPath}
                   fill="none"
                   stroke="rgba(255,255,255,0.09)"
-                  strokeWidth={18}
+                  strokeWidth={20}
                   strokeLinecap="round"
                 />
 
@@ -302,15 +310,14 @@ export function SpeedGauge({ className }: SpeedGaugeProps) {
                   />
                 ))}
 
-                {/* Progress — only render when there's enough to avoid a tiny blob at start */}
-                {progressDeg > 1.5 ? (
+                {/* Progress — thinner inset fill that visually sits inside the track */}
+                {progressDeg > 0.5 ? (
                   <path
                     d={progressPath}
                     fill="none"
                     stroke="url(#gauge-gradient)"
-                    strokeWidth={18}
+                    strokeWidth={13}
                     strokeLinecap="round"
-                    filter="url(#gauge-glow)"
                   />
                 ) : null}
 
@@ -401,7 +408,7 @@ export function SpeedGauge({ className }: SpeedGaugeProps) {
                   Download speed
                 </div>
                 <div className="mt-3 flex items-baseline justify-center gap-2">
-                  <span className="bg-gradient-to-b from-white to-white/70 bg-clip-text text-[3.25rem] font-bold leading-none tracking-[-0.045em] text-transparent tabular-nums">
+                  <span className="bg-[linear-gradient(to_bottom_in_oklch,white,rgba(255,255,255,0.88)_50%,rgba(255,255,255,0.7))] bg-clip-text text-[3.25rem] font-bold leading-none tracking-[-0.045em] text-transparent tabular-nums">
                     {(downloadResult ?? 0).toFixed(2)}
                   </span>
                   <span className="text-[14px] font-medium tracking-[-0.005em] text-muted-foreground">

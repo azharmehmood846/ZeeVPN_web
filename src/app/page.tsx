@@ -70,7 +70,7 @@ export default function Home() {
           <div className="mt-14 grid gap-5 lg:grid-cols-3">
             {productPillars.map((pillar, index) => (
               <AnimateOnScroll key={pillar.title} animation="fade-in-down" delay={index * 80}>
-                <Card className="group relative h-full overflow-hidden rounded-[1.75rem] border border-white/[0.08] bg-gradient-to-b from-white/[0.035] via-white/[0.012] to-transparent backdrop-blur-md transition-[border-color,background-color,box-shadow] duration-300 ease-out hover:border-primary/25 hover:shadow-[0_20px_50px_-20px_rgba(37,99,235,0.35)]">
+                <Card className="group relative h-full overflow-hidden rounded-[1.75rem] border border-white/[0.08] bg-[linear-gradient(to_bottom_in_oklch,rgba(255,255,255,0.035),rgba(255,255,255,0.018)_45%,rgba(255,255,255,0.006)_75%,transparent)] backdrop-blur-md transition-[border-color,background-color,box-shadow] duration-300 ease-out hover:border-primary/25 hover:shadow-[0_20px_50px_-20px_rgba(37,99,235,0.35)]">
                   {/* Top inner edge highlight */}
                   <span
                     aria-hidden
@@ -91,11 +91,11 @@ export default function Home() {
                         className="absolute -inset-3 rounded-[1.75rem] bg-primary/18 blur-2xl"
                       />
                       {/* Glass surface */}
-                      <div className="relative flex h-full w-full items-center justify-center rounded-[1.5rem] border border-white/[0.14] bg-gradient-to-br from-primary/[0.22] via-primary/[0.07] to-white/[0.02] shadow-[inset_0_1px_0_rgba(255,255,255,0.18),inset_0_-1px_0_rgba(0,0,0,0.35),0_10px_30px_-10px_rgba(0,0,0,0.55)]">
+                      <div className="relative flex h-full w-full items-center justify-center rounded-[1.5rem] border border-white/[0.14] bg-[linear-gradient(to_bottom_right_in_oklch,hsl(var(--primary)/0.22),hsl(var(--primary)/0.13)_35%,hsl(var(--primary)/0.06)_65%,rgba(255,255,255,0.02))] shadow-[inset_0_1px_0_rgba(255,255,255,0.18),inset_0_-1px_0_rgba(0,0,0,0.35),0_10px_30px_-10px_rgba(0,0,0,0.55)]">
                         {/* Top-left highlight gradient (light source) */}
                         <span
                           aria-hidden
-                          className="absolute inset-0 rounded-[1.5rem] bg-gradient-to-br from-white/[0.14] via-transparent to-transparent"
+                          className="absolute inset-0 rounded-[1.5rem] bg-[linear-gradient(to_bottom_right_in_oklch,rgba(255,255,255,0.14),rgba(255,255,255,0.04)_30%,transparent_60%)]"
                         />
                         {/* Inner faint ring */}
                         <span
@@ -201,7 +201,7 @@ export default function Home() {
                 <Card
                   className={`relative flex h-full flex-col overflow-hidden rounded-2xl border bg-white/[0.018] transition-[border-color,background-color] duration-300 ease-out ${
                     tier.featured
-                      ? 'border-primary/40 bg-gradient-to-b from-primary/[0.06] to-white/[0.01]'
+                      ? 'border-primary/40 bg-[linear-gradient(to_bottom_in_oklch,hsl(var(--primary)/0.06),hsl(var(--primary)/0.03)_50%,rgba(255,255,255,0.012))]'
                       : 'border-white/[0.06] hover:border-white/[0.11] hover:bg-white/[0.028]'
                   }`}
                 >
@@ -287,7 +287,7 @@ export default function Home() {
       <section className="pb-20 md:pb-24">
         <div className="container">
           <AnimateOnScroll animation="zoom-in">
-            <div className="relative overflow-hidden rounded-[1.75rem] border border-white/[0.08] bg-[radial-gradient(120%_120%_at_50%_0%,rgba(37,99,235,0.16),transparent_55%),linear-gradient(180deg,rgba(16,23,42,0.92),rgba(11,18,32,0.96))] px-6 py-14 sm:px-10 sm:py-16">
+            <div className="relative overflow-hidden rounded-[1.75rem] border border-white/[0.08] bg-[radial-gradient(120%_120%_at_50%_0%_in_oklch,rgba(37,99,235,0.16),rgba(37,99,235,0.05)_30%,transparent_55%),linear-gradient(180deg_in_oklch,rgba(16,23,42,0.92),rgba(13,19,32,0.94)_50%,rgba(11,18,32,0.96))] px-6 py-14 sm:px-10 sm:py-16">
               <span
                 className="pointer-events-none absolute -top-24 left-1/2 h-64 w-[28rem] -translate-x-1/2 rounded-full bg-primary/20 blur-3xl"
                 aria-hidden

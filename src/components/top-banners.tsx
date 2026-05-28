@@ -1,8 +1,10 @@
 "use client";
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { cn } from '@/lib/utils';
+
+const REFRESH_INTERVAL_MS = 20_000;
 
 type Verdict = 'clean' | 'suspicious' | 'vpn_likely' | 'vpn_detected';
 
@@ -40,11 +42,17 @@ function countryFlag(code?: string): string {
 export function TopBanners() {
   const [data, setData] = useState<ApiResponse | null>(null);
   const [error, setError] = useState(false);
+  const hasDataRef = useRef(false);
 
   useEffect(() => {
-    const controller = new AbortController();
+    let activeController: AbortController | null = null;
+    let cancelled = false;
 
     const fetchInfo = async () => {
+      if (activeController) activeController.abort();
+      const controller = new AbortController();
+      activeController = controller;
+
       try {
         const response = await fetch('https://iplogs.com/v1/check', {
           method: 'POST',
@@ -58,16 +66,32 @@ export function TopBanners() {
         });
         if (!response.ok) throw new Error('Failed to fetch IP info');
         const json: ApiResponse = await response.json();
+        if (cancelled) return;
         setData(json);
+        setError(false);
+        hasDataRef.current = true;
       } catch (err) {
-        if ((err as Error).name !== 'AbortError') {
-          setError(true);
-        }
+        if ((err as Error).name === 'AbortError') return;
+        // Silently keep existing data on subsequent failures
+        if (!hasDataRef.current && !cancelled) setError(true);
       }
     };
 
     fetchInfo();
-    return () => controller.abort();
+    const intervalId = window.setInterval(fetchInfo, REFRESH_INTERVAL_MS);
+
+    // Refresh immediately when tab becomes visible again
+    const onVisibilityChange = () => {
+      if (document.visibilityState === 'visible') fetchInfo();
+    };
+    document.addEventListener('visibilitychange', onVisibilityChange);
+
+    return () => {
+      cancelled = true;
+      window.clearInterval(intervalId);
+      document.removeEventListener('visibilitychange', onVisibilityChange);
+      if (activeController) activeController.abort();
+    };
   }, []);
 
   const isProtected = data?.is_vpn ?? false;

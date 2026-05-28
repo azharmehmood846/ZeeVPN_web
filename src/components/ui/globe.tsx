@@ -175,12 +175,12 @@ export function Globe({ className }: { className?: string }) {
       {/* Outer atmospheric halo for 3D depth */}
       <span
         aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10 rounded-full bg-[radial-gradient(circle_at_50%_45%,rgba(59,130,246,0.28),rgba(59,130,246,0.05)_45%,transparent_70%)] blur-2xl"
+        className="pointer-events-none absolute inset-0 -z-10 rounded-full bg-[radial-gradient(circle_at_50%_45%_in_oklch,rgba(59,130,246,0.28),rgba(59,130,246,0.14)_25%,rgba(59,130,246,0.05)_45%,transparent_70%)] blur-2xl"
       />
       {/* Inner soft glow tucked behind the canvas */}
       <span
         aria-hidden
-        className="pointer-events-none absolute inset-[8%] -z-10 rounded-full bg-[radial-gradient(circle_at_30%_28%,rgba(120,180,255,0.18),transparent_60%)] blur-md"
+        className="pointer-events-none absolute inset-[8%] -z-10 rounded-full bg-[radial-gradient(circle_at_30%_28%_in_oklch,rgba(120,180,255,0.18),rgba(120,180,255,0.06)_35%,transparent_60%)] blur-md"
       />
 
       <canvas
