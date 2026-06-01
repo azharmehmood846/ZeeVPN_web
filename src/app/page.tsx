@@ -5,7 +5,9 @@ import { CheckCircle2, ArrowDownToLine, ShieldCheck, Wifi, Globe2, Mail } from '
 
 import { AnimateOnScroll } from '@/components/animate-on-scroll';
 import { ContactForm } from '@/components/contact-form';
+import { FaqSection, type FaqItem } from '@/components/faq-section';
 import { HeroSection } from '@/components/hero-section';
+import { ScrollReveal } from '@/components/scroll-reveal';
 import { MarketingHeadline } from '@/components/marketing-headline';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -24,6 +26,49 @@ export const metadata: Metadata = {
 };
 
 const SHOW_PRICING = false;
+
+const homeFaqs: FaqItem[] = [
+  {
+    question: 'Is Zee VPN really free?',
+    answer:
+      'Yes. The free tier is supported by short ads — watch one at app open and the encrypted tunnel runs for the rest of your session. No subscription, no card on file, no hidden fees.',
+  },
+  {
+    question: 'Do I need to create an account?',
+    answer:
+      'No. Tap “Continue as Guest” on first open and you’re in. We generate a device-bound identifier to enforce free-tier limits and provide support, but no name, email, or payment details are required.',
+  },
+  {
+    question: 'Does Zee VPN log my browsing activity?',
+    answer:
+      'No. We operate a strict no-logs policy for VPN traffic — no websites visited, no DNS queries, no contents of any traffic carried over the tunnel. Full disclosure is in our Privacy Policy.',
+  },
+  {
+    question: 'Is it safe to use on public WiFi?',
+    answer:
+      'That’s exactly what it’s for. Zee VPN encrypts your traffic between your phone and our servers, so hotel, airport, and café hotspots can’t see what you’re doing — only that you’re connected to a VPN.',
+  },
+  {
+    question: 'What devices does Zee VPN support?',
+    answer:
+      'Android is supported today via the Google Play Store. Other platforms are on the roadmap — sign up via the contact form to be notified when iOS, desktop, or browser support ships.',
+  },
+  {
+    question: 'How long does one ad unlock?',
+    answer:
+      'One short ad at app open unlocks a full browsing session. You can also earn additional time by watching optional rewarded ads inside the app — exact amounts and caps are tuned in the app itself.',
+  },
+];
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: homeFaqs.map((f) => ({
+    '@type': 'Question',
+    name: f.question,
+    acceptedAnswer: { '@type': 'Answer', text: f.answer },
+  })),
+};
 
 const productPillars = [
   {
@@ -67,7 +112,21 @@ export default function Home() {
     <div className="relative overflow-hidden">
       <HeroSection />
 
-      <section className="py-20 md:py-24">
+      <section className="pt-16 pb-16 md:pt-28 md:pb-28">
+        <div className="container mx-auto">
+          <ScrollReveal
+            baseOpacity={0.18}
+            enableBlur
+            baseRotation={4}
+            blurStrength={8}
+            textClassName="!font-bold tracking-[-0.04em] text-foreground"
+          >
+            Zee VPN exists to make privacy feel easy. You open the app, watch one short ad, and your connection runs encrypted for the rest of your session. No account to sign up for. No subscription to remember.
+          </ScrollReveal>
+        </div>
+      </section>
+
+      <section id="features" className="scroll-mt-32 py-20 md:py-24">
         <div className="container">
           <AnimateOnScroll className="mx-auto max-w-3xl text-center">
             <span className="section-eyebrow">Why Zee VPN</span>
@@ -266,33 +325,121 @@ export default function Home() {
       </section>
       ) : null}
 
-      <section className="py-20 md:py-24">
+      {/* Contact */}
+      <section id="contact" className="scroll-mt-32 py-20 md:py-24">
         <div className="container">
           <AnimateOnScroll className="mx-auto max-w-3xl text-center">
-            <span className="section-eyebrow">Proof</span>
-            <MarketingHeadline className="mt-5">People use Zee every day after one ad</MarketingHeadline>
+            <span className="section-eyebrow">Contact</span>
+            <MarketingHeadline className="mt-5">Get in touch</MarketingHeadline>
+            <p className="section-body mt-3">
+              Questions, partnerships, or feedback — drop us a note and we&apos;ll get back within one business day.
+            </p>
           </AnimateOnScroll>
 
-          <div className="mt-14 grid gap-5 lg:grid-cols-2">
-            {testimonials.slice(0, 2).map((testimonial, index) => (
-              <AnimateOnScroll key={testimonial.name} animation="fade-in-down" delay={index * 70}>
-                <Card className="group h-full rounded-2xl border border-white/[0.06] bg-white/[0.018] transition-[border-color,background-color] duration-300 ease-out hover:border-white/[0.1] hover:bg-white/[0.028]">
-                  <CardContent className="p-8">
-                    <span className="block text-3xl leading-none text-primary/45" aria-hidden>“</span>
-                    <p className="mt-3 text-[1.0625rem] leading-[1.7] text-foreground/85">
-                      {testimonial.quote.split('.')[0]}.
-                    </p>
-                    <div className="mt-6 flex items-center gap-3">
-                      <span className="h-px w-6 bg-white/15" aria-hidden />
-                      <p className="text-[13px] font-medium tracking-[-0.005em] text-foreground/90">{testimonial.name}</p>
-                    </div>
-                  </CardContent>
-                </Card>
-              </AnimateOnScroll>
-            ))}
-          </div>
+          <AnimateOnScroll animation="fade-in-down" className="mx-auto mt-14 max-w-2xl">
+            <div className="relative overflow-hidden rounded-[1.5rem] border border-white/[0.07] bg-[linear-gradient(180deg_in_oklch,rgba(15,20,33,0.55),rgba(11,15,25,0.55))] p-7 backdrop-blur-sm md:p-9">
+              <span
+                aria-hidden
+                className="pointer-events-none absolute -top-20 right-0 h-48 w-72 -z-10 bg-[radial-gradient(60%_60%_at_70%_0%_in_oklch,rgba(37,99,235,0.2),transparent_70%)] blur-2xl"
+              />
+              <div className="mb-7 flex items-center gap-3">
+                <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-primary/30 bg-primary/[0.08]">
+                  <Mail className="h-4 w-4 text-primary" strokeWidth={1.8} />
+                </span>
+                <div>
+                  <p className="text-[10.5px] font-medium uppercase tracking-[0.22em] text-muted-foreground">
+                    Direct line
+                  </p>
+                  <a
+                    href="mailto:hi@zeevpn.com"
+                    className="text-[0.9375rem] font-medium text-foreground/95 transition-colors hover:text-primary"
+                  >
+                    hi@zeevpn.com
+                  </a>
+                </div>
+              </div>
+              <ContactForm />
+            </div>
+          </AnimateOnScroll>
         </div>
       </section>
+
+      <section
+        id="reviews"
+        aria-labelledby="testimonials-heading"
+        className="relative scroll-mt-32 overflow-hidden py-20 md:py-24"
+      >
+        <div className="container">
+          <AnimateOnScroll className="mx-auto max-w-3xl text-center">
+            <span className="section-eyebrow">Reviews</span>
+            <MarketingHeadline className="mt-5" as="h2">
+              People use Zee every day after one ad
+            </MarketingHeadline>
+            <p className="section-body mt-4">
+              A calmer way to stay private — when the tunnel just works in the background, you stop thinking about it.
+            </p>
+          </AnimateOnScroll>
+        </div>
+
+        <div className="relative mt-14 overflow-hidden">
+          <div className="flex w-max gap-4 px-4 sm:gap-5 sm:px-6 lg:px-8">
+            <div
+              className="flex w-max gap-4 animate-ticker sm:gap-5"
+              style={{ width: 'max-content', animationDuration: '48s' }}
+            >
+              {[...testimonials, ...testimonials, ...testimonials].map(
+                (testimonial, index) => (
+                  <article
+                    key={`${testimonial.name}-${index}`}
+                    className="group flex min-h-[15rem] w-[20rem] shrink-0 flex-col overflow-hidden rounded-[1.75rem] border border-white/[0.07] bg-[linear-gradient(180deg_in_oklch,rgba(15,20,33,0.55),rgba(11,15,25,0.55))] p-6 backdrop-blur-sm transition-[border-color,transform] duration-300 ease-out hover:-translate-y-0.5 hover:border-white/[0.12] sm:w-[24rem] sm:p-7"
+                  >
+                    <p className="flex-1 text-[15.5px] leading-[1.7] text-foreground/85">
+                      &ldquo;{testimonial.quote}&rdquo;
+                    </p>
+                    <div className="mt-6 flex items-end justify-between gap-4 border-t border-white/[0.08] pt-5">
+                      <div>
+                        <p className="text-[14.5px] font-semibold tracking-[-0.005em] text-foreground">
+                          {testimonial.name}
+                        </p>
+                        <p className="mt-0.5 text-[12.5px] text-muted-foreground">
+                          {testimonial.handle}
+                        </p>
+                      </div>
+                      <span
+                        className="text-[2.75rem] font-semibold leading-none text-primary/45 sm:text-[3.25rem]"
+                        aria-hidden
+                      >
+                        &rdquo;
+                      </span>
+                    </div>
+                  </article>
+                )
+              )}
+            </div>
+          </div>
+
+          <div
+            className="pointer-events-none absolute inset-y-0 left-0 z-10 w-20 bg-gradient-to-r from-background via-background/92 to-transparent sm:w-28 lg:w-40"
+            aria-hidden
+          />
+          <div
+            className="pointer-events-none absolute inset-y-0 right-0 z-10 w-20 bg-gradient-to-l from-background via-background/92 to-transparent sm:w-28 lg:w-40"
+            aria-hidden
+          />
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
+      <FaqSection
+        eyebrow="FAQ"
+        title="Questions, answered."
+        subtitle="If anything’s missing, the contact form above lands in our inbox — we reply within one business day."
+        faqs={homeFaqs}
+      />
 
       <section className="pb-20 md:pb-24">
         <div className="container">
@@ -336,44 +483,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Contact */}
-      <section id="contact" className="scroll-mt-32 py-20 md:py-24">
-        <div className="container">
-          <AnimateOnScroll className="mx-auto max-w-3xl text-center">
-            <span className="section-eyebrow">Contact</span>
-            <MarketingHeadline className="mt-5">Get in touch</MarketingHeadline>
-            <p className="section-body mt-3">
-              Questions, partnerships, or feedback — drop us a note and we&apos;ll get back within one business day.
-            </p>
-          </AnimateOnScroll>
-
-          <AnimateOnScroll animation="fade-in-down" className="mx-auto mt-14 max-w-2xl">
-            <div className="relative overflow-hidden rounded-[1.5rem] border border-white/[0.07] bg-[linear-gradient(180deg_in_oklch,rgba(15,20,33,0.55),rgba(11,15,25,0.55))] p-7 backdrop-blur-sm md:p-9">
-              <span
-                aria-hidden
-                className="pointer-events-none absolute -top-20 right-0 h-48 w-72 -z-10 bg-[radial-gradient(60%_60%_at_70%_0%_in_oklch,rgba(37,99,235,0.2),transparent_70%)] blur-2xl"
-              />
-              <div className="mb-7 flex items-center gap-3">
-                <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-primary/30 bg-primary/[0.08]">
-                  <Mail className="h-4 w-4 text-primary" strokeWidth={1.8} />
-                </span>
-                <div>
-                  <p className="text-[10.5px] font-medium uppercase tracking-[0.22em] text-muted-foreground">
-                    Direct line
-                  </p>
-                  <a
-                    href="mailto:hi@zeevpn.com"
-                    className="text-[0.9375rem] font-medium text-foreground/95 transition-colors hover:text-primary"
-                  >
-                    hi@zeevpn.com
-                  </a>
-                </div>
-              </div>
-              <ContactForm />
-            </div>
-          </AnimateOnScroll>
-        </div>
-      </section>
     </div>
   );
 }

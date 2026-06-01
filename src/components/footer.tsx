@@ -4,7 +4,6 @@ import { Logo } from '@/components/logo';
 import { ArrowUpRight } from 'lucide-react';
 
 const productLinks = [
-  { label: 'Download', href: '/download' },
   { label: 'How It Works', href: '/what-is-a-vpn' },
 ];
 

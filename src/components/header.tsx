@@ -9,15 +9,24 @@ import { Logo } from '@/components/logo';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
+import { PLAY_STORE_URL } from '@/lib/seo';
 
-const navLinks = [
-  { href: '/what-is-a-vpn', label: 'What is a VPN?' },
-  { href: '/download', label: 'Download' },
-  { href: '/blog', label: 'Blog' },
-  { href: '/#contact', label: 'Contact' },
+type NavLinkSpec = {
+  href: string;
+  label: string;
+  /** DOM id of the home-page section this link targets (for active-state tracking). */
+  sectionId?: string;
+};
+
+const navLinks: NavLinkSpec[] = [
+  { href: '/#features', label: 'Features', sectionId: 'features' },
+  { href: '/#reviews', label: 'Reviews', sectionId: 'reviews' },
+  { href: '/#faq', label: 'FAQ', sectionId: 'faq' },
+  { href: '/#contact', label: 'Contact', sectionId: 'contact' },
 ];
 
-const headerEase = '[transition-duration:650ms] [transition-timing-function:cubic-bezier(0.22,1,0.36,1)]';
+const headerEase =
+  '[transition-duration:650ms] [transition-timing-function:cubic-bezier(0.22,1,0.36,1)]';
 
 const stickyPillStyles =
   'border border-white/10 bg-[rgba(8,12,22,0.72)] shadow-[0_0_0_1px_rgba(255,255,255,0.05),0_8px_32px_rgba(0,0,0,0.42)] backdrop-blur-xl';
@@ -25,37 +34,35 @@ const stickyPillStyles =
 function NavLink({
   href,
   label,
+  isActive,
   onNavigate,
   className,
-  light = true,
 }: {
   href: string;
   label: string;
+  isActive: boolean;
   onNavigate?: () => void;
   className?: string;
-  light?: boolean;
 }) {
-  const pathname = usePathname();
-  const isActive = pathname === href;
-
   return (
     <Link
       href={href}
       onClick={onNavigate}
       className={cn(
-        'inline-flex h-10 items-center whitespace-nowrap rounded-full px-3.5 text-[15px] font-medium leading-none tracking-[-0.01em] transition-colors',
+        'relative inline-flex h-10 items-center whitespace-nowrap rounded-full px-3.5 text-[15px] font-medium leading-none tracking-[-0.01em] transition-colors',
         headerEase,
-        light
-          ? isActive
-            ? 'text-white'
-            : 'text-white/70 hover:text-white'
-          : isActive
-            ? 'text-[#111111]'
-            : 'text-[rgba(0,0,0,0.7)] hover:text-[#111111]',
+        isActive ? 'text-white' : 'text-white/70 hover:text-white',
         className
       )}
     >
       {label}
+      <span
+        aria-hidden
+        className={cn(
+          'pointer-events-none absolute bottom-[6px] left-1/2 h-[2px] -translate-x-1/2 rounded-full bg-primary transition-[width,opacity] duration-300 ease-out',
+          isActive ? 'w-4 opacity-100' : 'w-0 opacity-0'
+        )}
+      />
     </Link>
   );
 }
@@ -68,8 +75,10 @@ function GetAppButton({
   onClick?: () => void;
 }) {
   return (
-    <Link
-      href="/download"
+    <a
+      href={PLAY_STORE_URL}
+      target="_blank"
+      rel="noopener noreferrer"
       onClick={onClick}
       className={cn(
         'group inline-flex h-10 shrink-0 items-center justify-center gap-2 rounded-full border border-primary/40 bg-primary px-4 text-[15px] font-medium tracking-[-0.2px] text-primary-foreground shadow-[0_4px_14px_-4px_rgba(37,99,235,0.45)] transition-[transform,box-shadow,background-color,border-color]',
@@ -84,14 +93,17 @@ function GetAppButton({
         aria-hidden
       />
       Get App
-    </Link>
+    </a>
   );
 }
 
 export function Header() {
+  const pathname = usePathname();
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState<string | null>(null);
 
+  // Sticky pill scroll hysteresis
   useEffect(() => {
     const enterThreshold = 28;
     const exitThreshold = 12;
@@ -99,11 +111,43 @@ export function Header() {
       const y = window.scrollY;
       setIsScrolled((prev) => (prev ? y > exitThreshold : y > enterThreshold));
     };
-
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
+  // Track which landing-page section is in view (only meaningful on home)
+  useEffect(() => {
+    if (pathname !== '/') {
+      // Intentional reset when navigating off the home page — section IDs no longer exist.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setActiveSection(null);
+      return;
+    }
+    const ids = navLinks.map((l) => l.sectionId).filter(Boolean) as string[];
+    const elements = ids
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => el !== null);
+    if (elements.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.filter((e) => e.isIntersecting);
+        if (visible.length === 0) return;
+        visible.sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+        setActiveSection(visible[0].target.id);
+      },
+      { rootMargin: '-35% 0px -55% 0px', threshold: [0, 0.25, 0.5, 1] }
+    );
+
+    elements.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, [pathname]);
+
+  const linkIsActive = (link: NavLinkSpec) => {
+    if (pathname !== '/') return false;
+    return link.sectionId ? activeSection === link.sectionId : false;
+  };
 
   return (
     <header
@@ -142,7 +186,12 @@ export function Header() {
 
         <nav className="hidden min-w-0 flex-1 items-center justify-center gap-0.5 lg:flex">
           {navLinks.map((link) => (
-            <NavLink key={link.href} {...link} light />
+            <NavLink
+              key={link.href}
+              href={link.href}
+              label={link.label}
+              isActive={linkIsActive(link)}
+            />
           ))}
         </nav>
 
@@ -185,7 +234,9 @@ export function Header() {
                   {navLinks.map((link) => (
                     <NavLink
                       key={link.href}
-                      {...link}
+                      href={link.href}
+                      label={link.label}
+                      isActive={linkIsActive(link)}
                       onNavigate={() => setMenuOpen(false)}
                       className="h-11 w-full justify-start px-4"
                     />

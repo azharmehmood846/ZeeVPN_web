@@ -102,7 +102,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className="dark" suppressHydrationWarning>
       <head>
         {/* Resource hints for third-party origins hit on first paint */}
         <link rel="preconnect" href="https://iplogs.com" crossOrigin="anonymous" />
@@ -139,7 +139,10 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${inter.variable} font-body antialiased bg-background text-foreground`}>
+      <body
+        className={`${inter.variable} font-body antialiased bg-background text-foreground`}
+        suppressHydrationWarning
+      >
         <SmoothScroll />
         <div className="flex flex-col min-h-screen">
           <TopBanners />

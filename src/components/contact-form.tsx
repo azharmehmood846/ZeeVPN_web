@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { CheckCircle2, Send } from "lucide-react";
+import { AlertCircle, CheckCircle2, Send } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -24,6 +24,7 @@ type ContactFormValues = z.infer<typeof contactFormSchema>;
 export function ContactForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [submitted, setSubmitted] = useState<{ name: string } | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactFormSchema),
@@ -32,11 +33,14 @@ export function ContactForm() {
 
   async function onSubmit(values: ContactFormValues) {
     setIsLoading(true);
+    setErrorMessage(null);
     const result = await submitContactForm(values);
     setIsLoading(false);
     if (result.success) {
       setSubmitted({ name: values.name });
       form.reset();
+    } else {
+      setErrorMessage(result.message);
     }
   }
 
@@ -72,6 +76,15 @@ export function ContactForm() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
+        {errorMessage ? (
+          <div
+            role="alert"
+            className="flex items-start gap-3 rounded-2xl border border-rose-500/30 bg-rose-500/[0.07] px-4 py-3 text-[13px] leading-relaxed text-rose-200"
+          >
+            <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-rose-300" strokeWidth={2} />
+            <span>{errorMessage}</span>
+          </div>
+        ) : null}
         <div className="grid gap-5 sm:grid-cols-2">
           <FormField
             control={form.control}
