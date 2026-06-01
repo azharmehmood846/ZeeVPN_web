@@ -1,10 +1,8 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import Link from 'next/link';
-import { CheckCircle2, ArrowDownToLine, ShieldCheck, Wifi, Globe2, Mail } from 'lucide-react';
+import { CheckCircle2, ShieldCheck, Wifi, Globe2 } from 'lucide-react';
 
 import { AnimateOnScroll } from '@/components/animate-on-scroll';
-import { ContactForm } from '@/components/contact-form';
 import { FaqSection, type FaqItem } from '@/components/faq-section';
 import { HeroSection } from '@/components/hero-section';
 import { ScrollReveal } from '@/components/scroll-reveal';
@@ -14,6 +12,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { CountryTicker } from '@/components/ui/country-ticker';
 import { Globe } from '@/components/ui/globe';
 import { SpeedGauge } from '@/components/ui/speed-gauge';
+import { AppleIcon, GooglePlayIcon } from '@/components/store-icons';
 import { CDN_IMAGES } from '@/lib/cdn-images';
 import { premiumTiers, testimonials } from '@/lib/data';
 import { PLAY_STORE_URL } from '@/lib/seo';
@@ -51,7 +50,7 @@ const homeFaqs: FaqItem[] = [
   {
     question: 'What devices does Zee VPN support?',
     answer:
-      'Android is supported today via the Google Play Store. Other platforms are on the roadmap — sign up via the contact form to be notified when iOS, desktop, or browser support ships.',
+      'Android is supported today via the Google Play Store. Other platforms are on the roadmap — email us at hi@zeevpn.com to be notified when iOS, desktop, or browser support ships.',
   },
   {
     question: 'How long does one ad unlock?',
@@ -325,45 +324,6 @@ export default function Home() {
       </section>
       ) : null}
 
-      {/* Contact */}
-      <section id="contact" className="scroll-mt-32 py-20 md:py-24">
-        <div className="container">
-          <AnimateOnScroll className="mx-auto max-w-3xl text-center">
-            <span className="section-eyebrow">Contact</span>
-            <MarketingHeadline className="mt-5">Get in touch</MarketingHeadline>
-            <p className="section-body mt-3">
-              Questions, partnerships, or feedback — drop us a note and we&apos;ll get back within one business day.
-            </p>
-          </AnimateOnScroll>
-
-          <AnimateOnScroll animation="fade-in-down" className="mx-auto mt-14 max-w-2xl">
-            <div className="relative overflow-hidden rounded-[1.5rem] border border-white/[0.07] bg-[linear-gradient(180deg_in_oklch,rgba(15,20,33,0.55),rgba(11,15,25,0.55))] p-7 backdrop-blur-sm md:p-9">
-              <span
-                aria-hidden
-                className="pointer-events-none absolute -top-20 right-0 h-48 w-72 -z-10 bg-[radial-gradient(60%_60%_at_70%_0%_in_oklch,rgba(37,99,235,0.2),transparent_70%)] blur-2xl"
-              />
-              <div className="mb-7 flex items-center gap-3">
-                <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-primary/30 bg-primary/[0.08]">
-                  <Mail className="h-4 w-4 text-primary" strokeWidth={1.8} />
-                </span>
-                <div>
-                  <p className="text-[10.5px] font-medium uppercase tracking-[0.22em] text-muted-foreground">
-                    Direct line
-                  </p>
-                  <a
-                    href="mailto:hi@zeevpn.com"
-                    className="text-[0.9375rem] font-medium text-foreground/95 transition-colors hover:text-primary"
-                  >
-                    hi@zeevpn.com
-                  </a>
-                </div>
-              </div>
-              <ContactForm />
-            </div>
-          </AnimateOnScroll>
-        </div>
-      </section>
-
       <section
         id="reviews"
         aria-labelledby="testimonials-heading"
@@ -437,7 +397,7 @@ export default function Home() {
       <FaqSection
         eyebrow="FAQ"
         title="Questions, answered."
-        subtitle="If anything’s missing, the contact form above lands in our inbox — we reply within one business day."
+        subtitle="If anything’s missing, email us at hi@zeevpn.com and we’ll reply within one business day."
         faqs={homeFaqs}
       />
 
@@ -466,16 +426,25 @@ export default function Home() {
                 </span>
                 <MarketingHeadline className="mt-6">Install Zee. Watch one ad. Get hours</MarketingHeadline>
                 <p className="section-body mt-3">Unlimited Android VPN after a single short ad.</p>
-                <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
-                  <Button asChild size="lg" className="h-12 rounded-full px-7 shadow-[0_8px_28px_-6px_rgba(37,99,235,0.55)]">
-                    <a href={PLAY_STORE_URL} target="_blank" rel="noopener noreferrer">
-                      Download on Play Store
-                      <ArrowDownToLine className="ml-2 h-4 w-4" />
-                    </a>
-                  </Button>
-                  <Button asChild size="lg" variant="secondary" className="h-12 rounded-full border border-white/12 bg-white/[0.06] px-7 text-white backdrop-blur-md hover:bg-white/10">
-                    <Link href="/what-is-a-vpn">How it works</Link>
-                  </Button>
+                <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+                  <a
+                    href={PLAY_STORE_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group inline-flex h-12 items-center justify-center gap-2.5 rounded-full bg-primary px-7 text-[15px] font-semibold tracking-[-0.005em] text-primary-foreground shadow-[0_10px_32px_-8px_rgba(37,99,235,0.6)] transition-[background-color,box-shadow,transform] duration-300 hover:bg-primary/92 hover:shadow-[0_14px_40px_-8px_rgba(37,99,235,0.75)] active:scale-[0.98]"
+                  >
+                    <GooglePlayIcon className="h-[22px] w-[22px]" />
+                    <span>Download for free</span>
+                  </a>
+                  <button
+                    type="button"
+                    disabled
+                    aria-label="iOS version coming soon"
+                    className="inline-flex h-12 cursor-not-allowed items-center justify-center gap-2.5 rounded-full border border-white/10 bg-white/[0.04] px-7 text-[15px] font-semibold tracking-[-0.005em] text-white/85 backdrop-blur-md"
+                  >
+                    <AppleIcon className="h-[22px] w-[22px]" />
+                    <span>Coming soon</span>
+                  </button>
                 </div>
               </div>
             </div>

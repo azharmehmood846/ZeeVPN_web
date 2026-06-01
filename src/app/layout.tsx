@@ -6,6 +6,7 @@ import { Footer } from '@/components/footer';
 import { Toaster } from '@/components/ui/toaster';
 import { TopBanners } from '@/components/top-banners';
 import { SmoothScroll } from '@/components/smooth-scroll';
+import { ErrorSilencer } from '@/components/error-silencer';
 import {
   ORGANIZATION_JSONLD,
   SITE_DESCRIPTION,
@@ -144,6 +145,7 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <SmoothScroll />
+        <ErrorSilencer />
         <div className="flex flex-col min-h-screen">
           <TopBanners />
           <Header />

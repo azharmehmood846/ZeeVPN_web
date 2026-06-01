@@ -3,9 +3,10 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { Menu, Smartphone, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 import { Logo } from '@/components/logo';
+import { GooglePlayIcon } from '@/components/store-icons';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
@@ -22,7 +23,6 @@ const navLinks: NavLinkSpec[] = [
   { href: '/#features', label: 'Features', sectionId: 'features' },
   { href: '/#reviews', label: 'Reviews', sectionId: 'reviews' },
   { href: '/#faq', label: 'FAQ', sectionId: 'faq' },
-  { href: '/#contact', label: 'Contact', sectionId: 'contact' },
 ];
 
 const headerEase =
@@ -87,12 +87,8 @@ function GetAppButton({
         className
       )}
     >
-      <Smartphone
-        className="h-[18px] w-[18px] transition-transform duration-300 group-hover:-rotate-6"
-        strokeWidth={2}
-        aria-hidden
-      />
-      Get App
+      <GooglePlayIcon className="h-[19px] w-[19px] transition-transform duration-300 group-hover:scale-110" />
+      Download
     </a>
   );
 }
@@ -164,7 +160,7 @@ export function Header() {
           'mx-auto flex items-center gap-3 [will-change:max-width,height,padding] transition-[max-width,height,padding,background-color,border-radius,box-shadow,border-color,backdrop-filter,gap]',
           headerEase,
           isScrolled
-            ? cn('h-14 max-w-[920px] rounded-full px-3 sm:px-4', stickyPillStyles)
+            ? cn('h-14 max-w-[920px] rounded-full pl-3 pr-1.5 sm:pl-4 sm:pr-2', stickyPillStyles)
             : 'h-[72px] max-w-none gap-6 rounded-none !border-0 !bg-transparent px-4 !shadow-none !backdrop-blur-none sm:px-6 lg:container'
         )}
       >

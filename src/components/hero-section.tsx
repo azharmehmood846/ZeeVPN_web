@@ -1,6 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 
 import { AnimateOnScroll } from "@/components/animate-on-scroll";
 import { HeroBackground } from "@/components/hero-background";
@@ -9,9 +7,9 @@ import {
   marketingHeadlineGradientClass,
   marketingHeadlineGradientMutedClass,
 } from "@/components/marketing-headline";
+import { AppleIcon, GooglePlayIcon } from "@/components/store-icons";
 import { CDN_IMAGES } from "@/lib/cdn-images";
 import { PLAY_STORE_URL } from "@/lib/seo";
-import { Button } from "@/components/ui/button";
 
 export function HeroSection() {
   return (
@@ -36,24 +34,24 @@ export function HeroSection() {
           </p>
 
           <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Button
-              asChild
-              size="lg"
-              className="group h-12 rounded-full px-8 text-base shadow-[0_10px_32px_-8px_rgba(37,99,235,0.6)] transition-shadow duration-300 hover:shadow-[0_14px_40px_-8px_rgba(37,99,235,0.75)]"
+            <a
+              href={PLAY_STORE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex h-12 items-center justify-center gap-2.5 rounded-full bg-primary px-7 text-[15px] font-semibold tracking-[-0.005em] text-primary-foreground shadow-[0_10px_32px_-8px_rgba(37,99,235,0.6)] transition-[background-color,box-shadow,transform] duration-300 hover:bg-primary/92 hover:shadow-[0_14px_40px_-8px_rgba(37,99,235,0.75)] active:scale-[0.98]"
             >
-              <a href={PLAY_STORE_URL} target="_blank" rel="noopener noreferrer">
-                Get on Play Store
-                <ArrowRight className="ml-1.5 h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
-              </a>
-            </Button>
-            <Button
-              asChild
-              size="lg"
-              variant="secondary"
-              className="h-12 rounded-full border border-white/10 bg-white/[0.04] px-8 text-base text-white backdrop-blur-md transition-colors duration-300 hover:bg-white/[0.09]"
+              <GooglePlayIcon className="h-[22px] w-[22px]" />
+              <span>Download for free</span>
+            </a>
+            <button
+              type="button"
+              disabled
+              aria-label="iOS version coming soon"
+              className="inline-flex h-12 cursor-not-allowed items-center justify-center gap-2.5 rounded-full border border-white/10 bg-white/[0.04] px-7 text-[15px] font-semibold tracking-[-0.005em] text-white/85 backdrop-blur-md"
             >
-              <Link href="/what-is-a-vpn">How it works</Link>
-            </Button>
+              <AppleIcon className="h-[22px] w-[22px]" />
+              <span>Coming soon</span>
+            </button>
           </div>
         </AnimateOnScroll>
 
