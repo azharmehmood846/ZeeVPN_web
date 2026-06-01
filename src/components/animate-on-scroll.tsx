@@ -33,12 +33,15 @@ export function AnimateOnScroll({
     }
 
     if (typeof window === 'undefined' || !('IntersectionObserver' in window)) {
+      // One-time fallback when IntersectionObserver isn't available — runs once on mount.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsVisible(true);
       return;
     }
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) {
+      // Skip the IntersectionObserver dance when the user prefers reduced motion.
       setIsVisible(true);
       return;
     }

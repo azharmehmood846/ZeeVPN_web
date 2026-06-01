@@ -324,6 +324,9 @@ export function ColorBends({
         container.removeChild(renderer.domElement);
       }
     };
+    // Three.js context recreation is intentional only when `transparent` changes —
+    // including the uniform-value deps here would tear down and rebuild WebGL on every uniform tweak.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [transparent]);
 
   useEffect(() => {
@@ -333,6 +336,8 @@ export function ColorBends({
 
     applyUniforms(material);
     if (renderer) renderer.setClearColor(0x000000, transparent ? 0 : 1);
+    // applyUniforms is intentionally not in the deps — it's a stable closure that captures the same props this effect already lists.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     rotation,
     autoRotate,

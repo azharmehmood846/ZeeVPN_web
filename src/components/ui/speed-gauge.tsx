@@ -166,8 +166,9 @@ export function SpeedGauge({ className }: SpeedGaugeProps) {
     engine.play();
   }, []);
 
-  // Auto-run once on mount
+  // Auto-run once on mount — intentional kickoff of the speed-test pipeline.
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     startTest();
     return () => {
       if (engineRef.current) {

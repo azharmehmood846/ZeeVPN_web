@@ -15,10 +15,16 @@ const resolvedSiteUrl =
     : "https://zeevpn.com");
 
 export const SITE_URL = resolvedSiteUrl.replace(/\/$/, "");
+
+export const PLAY_STORE_URL =
+  "https://play.google.com/store/apps/details?id=com.zeevpn.secure.proxy";
+
+export const CONTACT_EMAIL = "hi@zeevpn.com";
 export const SITE_NAME = "Zee VPN";
 export const SITE_TAGLINE = "Free Android VPN — One Ad Unlocks Hours";
+// Keep meta descriptions <= 155 chars (Google SERP limit ~158 chars / 985 px).
 export const SITE_DESCRIPTION =
-  "Zee VPN is a free Android VPN. Watch one short ad to unlock hours of unlimited, encrypted VPN access — no subscription, no signup, just privacy on your terms.";
+  "Free Android VPN. Watch one short ad to unlock hours of unlimited, encrypted access. No subscription, no signup, just privacy on your terms.";
 
 export const SITE_KEYWORDS = [
   "free VPN",

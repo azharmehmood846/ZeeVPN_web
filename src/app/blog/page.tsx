@@ -41,6 +41,19 @@ export default function BlogPage() {
                 </p>
             </div>
 
+            <section className="mx-auto mt-12 max-w-3xl text-center">
+                <h2 className="text-2xl font-semibold font-headline tracking-tight">Why privacy reading matters</h2>
+                <p className="mt-4 text-base leading-7 text-muted-foreground">
+                    Online privacy is moving faster than most people realize. Trackers
+                    follow you across sites, ISPs sell browsing data, and public WiFi
+                    networks still leak traffic in plaintext when apps are misconfigured.
+                    The articles below cover practical, no-jargon ways to take back control
+                    — when a VPN actually helps, when it doesn&apos;t, and how to use one
+                    without slowing down your day.
+                </p>
+            </section>
+
+            <h2 className="sr-only">Latest articles</h2>
             <div className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
                 {blogPosts.map((post) => (
                     <Card key={post.id} className="rounded-xl overflow-hidden flex flex-col hover:shadow-2xl hover:shadow-primary/10 hover:border-primary/50 transition-all duration-300">

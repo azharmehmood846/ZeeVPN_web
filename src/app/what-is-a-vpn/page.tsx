@@ -9,7 +9,7 @@ import { StickyNav } from './sticky-nav';
 export const metadata: Metadata = {
   title: 'What is a VPN? An In-Depth Guide',
   description:
-    'Learn what a VPN is, how it works, and why you should use one. A practical guide to encryption, IP masking, public WiFi safety, and choosing the right provider.',
+    'Learn what a VPN is, how it works, and why you should use one. A practical guide to encryption, IP masking, and public WiFi safety.',
   alternates: { canonical: '/what-is-a-vpn' },
   openGraph: {
     title: 'What is a VPN? An In-Depth Guide',
@@ -129,7 +129,7 @@ export default function WhatIsAVPNPage() {
               className="my-8 h-auto w-full object-contain"
             />
             <p>
-              At its core, a VPN is a service that creates a secure, encrypted connection between your device (like a computer or smartphone) and the internet. This connection, often called a "tunnel," routes all your internet traffic through a server operated by the VPN provider. This process masks your real IP address and encrypts your data, making it unreadable to anyone who might try to intercept it, such as your Internet Service Provider (ISP), government agencies, or hackers on public Wi-Fi.
+              At its core, a VPN is a service that creates a secure, encrypted connection between your device (like a computer or smartphone) and the internet. This connection, often called a &ldquo;tunnel,&rdquo; routes all your internet traffic through a server operated by the VPN provider. This process masks your real IP address and encrypts your data, making it unreadable to anyone who might try to intercept it, such as your Internet Service Provider (ISP), government agencies, or hackers on public Wi-Fi.
             </p>
           </section>
 
@@ -141,7 +141,7 @@ export default function WhatIsAVPNPage() {
             <ol>
               <li><strong>Authentication:</strong> When you connect to a VPN service, your client software authenticates with the VPN server.</li>
               <li><strong>Tunneling:</strong> Once authenticated, the VPN creates an encrypted tunnel between your device and the server. All data passing through this tunnel is encapsulated and encrypted. The protocols used for this, like OpenVPN or WireGuard, ensure the tunnel is secure.</li>
-              <li><strong>Encryption:</strong> Your data is scrambled using advanced encryption standards (like AES-256). This means that even if someone intercepted your traffic, they wouldn't be able to read it without the decryption key.</li>
+              <li><strong>Encryption:</strong> Your data is scrambled using advanced encryption standards (like AES-256). This means that even if someone intercepted your traffic, they wouldn&apos;t be able to read it without the decryption key.</li>
               <li><strong>IP Masking:</strong> When your traffic reaches the VPN server, it is decrypted and sent to its final destination on the internet. However, the source IP address is now that of the VPN server, not your own. Your real IP address is effectively hidden, protecting your location and identity.</li>
             </ol>
           </section>

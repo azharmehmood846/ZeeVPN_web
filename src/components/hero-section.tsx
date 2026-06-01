@@ -10,6 +10,7 @@ import {
   marketingHeadlineGradientMutedClass,
 } from "@/components/marketing-headline";
 import { CDN_IMAGES } from "@/lib/cdn-images";
+import { PLAY_STORE_URL } from "@/lib/seo";
 import { Button } from "@/components/ui/button";
 
 export function HeroSection() {
@@ -40,10 +41,10 @@ export function HeroSection() {
               size="lg"
               className="group h-12 rounded-full px-8 text-base shadow-[0_10px_32px_-8px_rgba(37,99,235,0.6)] transition-shadow duration-300 hover:shadow-[0_14px_40px_-8px_rgba(37,99,235,0.75)]"
             >
-              <Link href="/download">
-                Get the App
+              <a href={PLAY_STORE_URL} target="_blank" rel="noopener noreferrer">
+                Get on Play Store
                 <ArrowRight className="ml-1.5 h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
-              </Link>
+              </a>
             </Button>
             <Button
               asChild

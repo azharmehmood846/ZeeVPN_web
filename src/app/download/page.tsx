@@ -2,15 +2,14 @@ import type { Metadata } from "next";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { downloadPlatforms } from "@/lib/data";
-import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
-import { breadcrumbJsonLd, SITE_NAME, SITE_URL } from "@/lib/seo";
+import { breadcrumbJsonLd, PLAY_STORE_URL, SITE_NAME, SITE_URL } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Download Zee VPN — Free Android VPN App",
   description:
-    "Download Zee VPN — free Android VPN unlocked by a single short ad. No subscription, no signup. Available on Android, with desktop and other platforms coming soon.",
+    "Download Zee VPN — free Android VPN unlocked by a single short ad. No subscription, no signup. Desktop and other platforms coming soon.",
   alternates: { canonical: "/download" },
   openGraph: {
     title: "Download Zee VPN — Free Android VPN App",
@@ -65,6 +64,19 @@ export default function DownloadPage() {
                     Secure all your devices. Zee VPN is available on all major platforms.
                 </p>
             </div>
+
+            <section className="mx-auto mt-12 max-w-3xl text-center">
+                <h2 className="text-2xl font-semibold font-headline tracking-tight">What you get with the app</h2>
+                <p className="mt-4 text-base leading-7 text-muted-foreground">
+                    Zee VPN runs on the lightweight, free Android app — install in under
+                    a minute, watch one short ad at open, and the encrypted tunnel runs
+                    for the rest of your session. There&apos;s no account, no subscription,
+                    and no card on file. The app stays connected on bad WiFi, picks the
+                    fastest server automatically, and never logs your traffic.
+                </p>
+            </section>
+
+            <h2 className="sr-only">Choose your platform</h2>
             <div className="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
                 {downloadPlatforms.map((platform) => (
                     <Card key={platform.name} className="rounded-xl hover:shadow-2xl hover:shadow-primary/10 hover:border-primary/50 transition-all duration-300">
@@ -79,9 +91,9 @@ export default function DownloadPage() {
                         </CardHeader>
                         <CardContent>
                             <Button asChild className="w-full rounded-lg">
-                                <Link href="#">
-                                    Get Secured Now <ArrowRight className="ml-2 h-4 w-4" />
-                                </Link>
+                                <a href={PLAY_STORE_URL} target="_blank" rel="noopener noreferrer">
+                                    Get on Play Store <ArrowRight className="ml-2 h-4 w-4" />
+                                </a>
                             </Button>
                         </CardContent>
                     </Card>

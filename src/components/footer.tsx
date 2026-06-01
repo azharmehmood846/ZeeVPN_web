@@ -1,13 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Logo } from '@/components/logo';
-import { ArrowUpRight, Twitter, Facebook, Linkedin } from 'lucide-react';
-
-const socialLinks = [
-  { name: 'Twitter', icon: Twitter, href: '#' },
-  { name: 'Facebook', icon: Facebook, href: '#' },
-  { name: 'LinkedIn', icon: Linkedin, href: '#' },
-];
+import { ArrowUpRight } from 'lucide-react';
 
 const productLinks = [
   { label: 'Download', href: '/download' },
@@ -16,8 +10,7 @@ const productLinks = [
 
 const companyLinks = [
   { label: 'Blog', href: '/blog' },
-  { label: 'Contact', href: '/contact' },
-  { label: 'Free PIN', href: '/get-pin' },
+  { label: 'Contact', href: '/#contact' },
 ];
 
 function FooterLink({ label, href }: { label: string; href: string }) {
@@ -47,7 +40,7 @@ export function Footer() {
       >
         <Image
           src="/zee-Vector.png"
-          alt=""
+          alt="Zee VPN brand mark"
           width={2185}
           height={2673}
           className="h-[15rem] w-auto object-contain object-right-bottom sm:h-[19rem] md:h-[24rem]"
@@ -56,7 +49,7 @@ export function Footer() {
 
       <div className="container relative z-10 py-16 lg:py-20">
         {/* Main columns */}
-        <div className="grid gap-12 lg:grid-cols-[1.5fr_1fr_1fr_1fr] lg:gap-10">
+        <div className="grid gap-12 lg:grid-cols-[2fr_1fr_1fr] lg:gap-12">
           {/* Brand */}
           <div className="space-y-5">
             <Logo size="lg" showWordmark tone="light" />
@@ -95,41 +88,34 @@ export function Footer() {
             </ul>
           </nav>
 
-          {/* Connect */}
-          <div>
-            <h3 className="text-[11px] font-medium uppercase tracking-[0.22em] text-muted-foreground/85">
-              Connect
-            </h3>
-            <div className="mt-6 flex items-center gap-2">
-              {socialLinks.map((social) => (
-                <Link
-                  key={social.name}
-                  href={social.href}
-                  aria-label={social.name}
-                  className="group relative inline-flex h-10 w-10 items-center justify-center rounded-full text-muted-foreground transition-colors duration-300 hover:text-foreground"
-                >
-                  <span
-                    className="absolute inset-0 rounded-full border border-white/[0.06] bg-white/[0.015] transition-[border-color,background-color] duration-300 group-hover:border-white/15 group-hover:bg-white/[0.05]"
-                    aria-hidden
-                  />
-                  <social.icon className="relative h-[15px] w-[15px]" strokeWidth={1.75} />
-                </Link>
-              ))}
-            </div>
-          </div>
         </div>
 
         {/* Bottom hairline + meta row */}
         <div className="mt-16 h-px hairline-divider" aria-hidden />
 
-        <div className="mt-7 flex flex-col gap-3 text-[12.5px] text-muted-foreground/85 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-7 flex flex-col gap-4 text-[12.5px] text-muted-foreground/85 sm:flex-row sm:items-center sm:justify-between">
           <p>
             &copy; {new Date().getFullYear()} <span className="text-foreground/90">Zee VPN</span>. All rights reserved.
           </p>
-          <p className="inline-flex items-center gap-2">
-            <span className="h-1.5 w-1.5 rounded-full bg-accent shadow-[0_0_8px_rgba(56,179,108,0.7)]" aria-hidden />
-            All systems operational
-          </p>
+
+          <nav aria-label="Legal" className="flex flex-wrap items-center gap-x-5 gap-y-2">
+            <Link
+              href="/privacy"
+              className="transition-colors duration-300 hover:text-foreground"
+            >
+              Privacy Policy
+            </Link>
+            <Link
+              href="/terms"
+              className="transition-colors duration-300 hover:text-foreground"
+            >
+              Terms &amp; Conditions
+            </Link>
+            <span className="inline-flex items-center gap-2">
+              <span className="h-1.5 w-1.5 rounded-full bg-accent shadow-[0_0_8px_rgba(56,179,108,0.7)]" aria-hidden />
+              All systems operational
+            </span>
+          </nav>
         </div>
       </div>
     </footer>

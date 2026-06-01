@@ -14,7 +14,7 @@ const navLinks = [
   { href: '/what-is-a-vpn', label: 'What is a VPN?' },
   { href: '/download', label: 'Download' },
   { href: '/blog', label: 'Blog' },
-  { href: '/contact', label: 'Contact' },
+  { href: '/#contact', label: 'Contact' },
 ];
 
 const headerEase = '[transition-duration:650ms] [transition-timing-function:cubic-bezier(0.22,1,0.36,1)]';

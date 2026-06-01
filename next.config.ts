@@ -40,6 +40,11 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  // Pin the Turbopack workspace root to this project so a stray parent-directory
+  // lockfile doesn't pull it up a level (was causing PageNotFoundError on build).
+  turbopack: {
+    root: __dirname,
+  },
   images: {
     remotePatterns: [
       {

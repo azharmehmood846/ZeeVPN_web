@@ -1,9 +1,10 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { CheckCircle2, LockKeyhole, ShieldCheck, Wifi, Globe2 } from 'lucide-react';
+import { CheckCircle2, ArrowDownToLine, ShieldCheck, Wifi, Globe2, Mail } from 'lucide-react';
 
 import { AnimateOnScroll } from '@/components/animate-on-scroll';
+import { ContactForm } from '@/components/contact-form';
 import { HeroSection } from '@/components/hero-section';
 import { MarketingHeadline } from '@/components/marketing-headline';
 import { Button } from '@/components/ui/button';
@@ -13,6 +14,7 @@ import { Globe } from '@/components/ui/globe';
 import { SpeedGauge } from '@/components/ui/speed-gauge';
 import { CDN_IMAGES } from '@/lib/cdn-images';
 import { premiumTiers, testimonials } from '@/lib/data';
+import { PLAY_STORE_URL } from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: 'Free Android VPN — One Ad Unlocks Hours',
@@ -145,7 +147,7 @@ export default function Home() {
               >
                 <div className="max-w-xl">
                   <span className="section-eyebrow">{row.eyebrow}</span>
-                  <MarketingHeadline as="h3" className="mt-4">
+                  <MarketingHeadline as="h2" className="mt-4">
                     {row.title}
                   </MarketingHeadline>
                   <p className="section-body mt-4">{row.description}</p>
@@ -253,7 +255,7 @@ export default function Home() {
                       variant={tier.featured ? 'default' : 'secondary'}
                       className="w-full rounded-full"
                     >
-                      <Link href="/get-pin">{tier.featured ? 'Start With Pro' : 'Choose Plan'}</Link>
+                      <a href={PLAY_STORE_URL} target="_blank" rel="noopener noreferrer">{tier.featured ? 'Start With Pro' : 'Choose Plan'}</a>
                     </Button>
                   </CardFooter>
                 </Card>
@@ -319,16 +321,55 @@ export default function Home() {
                 <p className="section-body mt-3">Unlimited Android VPN after a single short ad.</p>
                 <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
                   <Button asChild size="lg" className="h-12 rounded-full px-7 shadow-[0_8px_28px_-6px_rgba(37,99,235,0.55)]">
-                    <Link href="/get-pin">
-                      Request Free PIN
-                      <LockKeyhole className="ml-2 h-4 w-4" />
-                    </Link>
+                    <a href={PLAY_STORE_URL} target="_blank" rel="noopener noreferrer">
+                      Download on Play Store
+                      <ArrowDownToLine className="ml-2 h-4 w-4" />
+                    </a>
                   </Button>
                   <Button asChild size="lg" variant="secondary" className="h-12 rounded-full border border-white/12 bg-white/[0.06] px-7 text-white backdrop-blur-md hover:bg-white/10">
                     <Link href="/what-is-a-vpn">How it works</Link>
                   </Button>
                 </div>
               </div>
+            </div>
+          </AnimateOnScroll>
+        </div>
+      </section>
+
+      {/* Contact */}
+      <section id="contact" className="scroll-mt-32 py-20 md:py-24">
+        <div className="container">
+          <AnimateOnScroll className="mx-auto max-w-3xl text-center">
+            <span className="section-eyebrow">Contact</span>
+            <MarketingHeadline className="mt-5">Get in touch</MarketingHeadline>
+            <p className="section-body mt-3">
+              Questions, partnerships, or feedback — drop us a note and we&apos;ll get back within one business day.
+            </p>
+          </AnimateOnScroll>
+
+          <AnimateOnScroll animation="fade-in-down" className="mx-auto mt-14 max-w-2xl">
+            <div className="relative overflow-hidden rounded-[1.5rem] border border-white/[0.07] bg-[linear-gradient(180deg_in_oklch,rgba(15,20,33,0.55),rgba(11,15,25,0.55))] p-7 backdrop-blur-sm md:p-9">
+              <span
+                aria-hidden
+                className="pointer-events-none absolute -top-20 right-0 h-48 w-72 -z-10 bg-[radial-gradient(60%_60%_at_70%_0%_in_oklch,rgba(37,99,235,0.2),transparent_70%)] blur-2xl"
+              />
+              <div className="mb-7 flex items-center gap-3">
+                <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-primary/30 bg-primary/[0.08]">
+                  <Mail className="h-4 w-4 text-primary" strokeWidth={1.8} />
+                </span>
+                <div>
+                  <p className="text-[10.5px] font-medium uppercase tracking-[0.22em] text-muted-foreground">
+                    Direct line
+                  </p>
+                  <a
+                    href="mailto:hi@zeevpn.com"
+                    className="text-[0.9375rem] font-medium text-foreground/95 transition-colors hover:text-primary"
+                  >
+                    hi@zeevpn.com
+                  </a>
+                </div>
+              </div>
+              <ContactForm />
             </div>
           </AnimateOnScroll>
         </div>
