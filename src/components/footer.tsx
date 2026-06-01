@@ -4,20 +4,6 @@ import Link from 'next/link';
 export function Footer() {
   return (
     <footer className="relative isolate overflow-hidden bg-[linear-gradient(to_top_in_oklch,hsl(var(--primary)/0.55),hsl(var(--primary)/0.28)_20%,hsl(var(--primary)/0.1)_45%,hsl(var(--background))_75%,hsl(var(--background)))]">
-      {/* Atmosphere layers */}
-      <div
-        className="pointer-events-none absolute -bottom-20 -right-12 z-0 opacity-[0.18] mix-blend-screen sm:-bottom-24 sm:-right-16"
-        aria-hidden
-      >
-        <Image
-          src="/zee-Vector.png"
-          alt="Zee VPN brand mark"
-          width={2185}
-          height={2673}
-          className="h-[15rem] w-auto object-contain object-right-bottom sm:h-[19rem] md:h-[24rem]"
-        />
-      </div>
-
       <div className="container relative z-10 pb-6 pt-4 lg:pb-8 lg:pt-6">
         <div className="h-px hairline-divider" aria-hidden />
 
@@ -44,6 +30,18 @@ export function Footer() {
               All systems operational
             </span>
           </nav>
+        </div>
+
+        {/* Brand band — outlined Zee VPN wordmark with shield */}
+        <div className="relative mt-10 flex select-none justify-center px-4 lg:mt-14" aria-hidden>
+          <Image
+            src="/zee-vpn-brand.png"
+            alt=""
+            width={1521}
+            height={355}
+            className="h-auto w-full max-w-5xl object-contain"
+            priority={false}
+          />
         </div>
       </div>
     </footer>
