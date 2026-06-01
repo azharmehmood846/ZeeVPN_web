@@ -1,9 +1,24 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { blogPosts } from "@/lib/data";
+import { SITE_URL } from "@/lib/seo";
+
+export const metadata: Metadata = {
+  title: "Blog — Privacy & VPN Insights",
+  description:
+    "Practical insights on online privacy, VPN usage, public WiFi safety, and getting the most out of Zee VPN.",
+  alternates: { canonical: "/blog" },
+  openGraph: {
+    title: "Zee VPN Blog — Privacy & VPN Insights",
+    description:
+      "Practical insights on online privacy, VPN usage, and digital safety.",
+    url: `${SITE_URL}/blog`,
+  },
+};
 
 export default function BlogPage() {
     return (

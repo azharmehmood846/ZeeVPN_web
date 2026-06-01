@@ -1,9 +1,25 @@
+import type { Metadata } from 'next';
 import { ContactForm } from './contact-form';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Mail, Phone, MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { Twitter, Facebook, Linkedin } from 'lucide-react';
+
+import { SITE_URL } from '@/lib/seo';
+
+export const metadata: Metadata = {
+  title: 'Contact Us — Support & Inquiries',
+  description:
+    'Get in touch with Zee VPN. Reach our team for support, partnerships, or feedback.',
+  alternates: { canonical: '/contact' },
+  openGraph: {
+    title: 'Contact Zee VPN — Support & Inquiries',
+    description:
+      'Reach the Zee VPN team for support, partnerships, or feedback.',
+    url: `${SITE_URL}/contact`,
+  },
+};
 
 const socialLinks = [
   { name: 'Twitter', icon: Twitter, href: '#' },

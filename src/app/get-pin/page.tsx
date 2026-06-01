@@ -1,6 +1,60 @@
+import type { Metadata } from "next";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { PinForm } from "./pin-form";
 import { ListChecks, Download, Router, Play } from "lucide-react";
+
+import { SITE_NAME, SITE_URL } from "@/lib/seo";
+
+export const metadata: Metadata = {
+  title: "Free PIN — Unlock 6 Hours of VPN Access",
+  description:
+    "Request a free 6-hour Zee VPN PIN. Check eligibility, download the app, enter your PIN, and start browsing securely — no subscription or signup required.",
+  alternates: { canonical: "/get-pin" },
+  openGraph: {
+    title: "Free PIN — Unlock 6 Hours of Zee VPN Access",
+    description:
+      "Check eligibility, download the app, enter your PIN, and start browsing securely.",
+    url: `${SITE_URL}/get-pin`,
+  },
+};
+
+const howToJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  name: "How to get a free 6-hour Zee VPN PIN",
+  description:
+    "Four steps to redeem a free 6-hour Zee VPN PIN: check eligibility, download the app, enter the PIN, start browsing.",
+  totalTime: "PT2M",
+  estimatedCost: { "@type": "MonetaryAmount", currency: "USD", value: 0 },
+  step: [
+    {
+      "@type": "HowToStep",
+      position: 1,
+      name: "Check Eligibility",
+      text: "Fill out the form to see if you qualify for a free PIN.",
+      url: `${SITE_URL}/get-pin#check-eligibility`,
+    },
+    {
+      "@type": "HowToStep",
+      position: 2,
+      name: "Download App",
+      text: `Get the ${SITE_NAME} app for your device from our download page.`,
+      url: `${SITE_URL}/download`,
+    },
+    {
+      "@type": "HowToStep",
+      position: 3,
+      name: "Enter PIN",
+      text: "Launch the app and enter the PIN you receive.",
+    },
+    {
+      "@type": "HowToStep",
+      position: 4,
+      name: "Start Browsing",
+      text: "Enjoy 6 hours of secure and unrestricted internet access.",
+    },
+  ],
+};
 
 const steps = [
     {
@@ -28,6 +82,10 @@ const steps = [
 export default function GetPinPage() {
     return (
         <div className="container pb-24 pt-[calc(6rem+4.5rem)]">
+            <script
+              type="application/ld+json"
+              dangerouslySetInnerHTML={{ __html: JSON.stringify(howToJsonLd) }}
+            />
             <div className="max-w-4xl mx-auto">
                 <div className="text-center">
                     <h1 className="text-4xl md:text-5xl font-bold font-headline tracking-tight">Get Your Free 6-Hour PIN</h1>

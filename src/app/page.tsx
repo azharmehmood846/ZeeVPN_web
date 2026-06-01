@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { CheckCircle2, LockKeyhole, ShieldCheck, Wifi, Globe2 } from 'lucide-react';
@@ -12,6 +13,13 @@ import { Globe } from '@/components/ui/globe';
 import { SpeedGauge } from '@/components/ui/speed-gauge';
 import { CDN_IMAGES } from '@/lib/cdn-images';
 import { premiumTiers, testimonials } from '@/lib/data';
+
+export const metadata: Metadata = {
+  title: 'Free Android VPN — One Ad Unlocks Hours',
+  description:
+    'Zee VPN is a free Android VPN. Watch one short ad to unlock hours of unlimited, encrypted access. No subscription, no signup — privacy on your terms.',
+  alternates: { canonical: '/' },
+};
 
 const SHOW_PRICING = false;
 

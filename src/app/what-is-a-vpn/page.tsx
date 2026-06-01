@@ -1,8 +1,24 @@
+import type { Metadata } from 'next';
 import Image from 'next/image';
 
 import { CDN_IMAGES } from '@/lib/cdn-images';
+import { SITE_NAME, SITE_URL } from '@/lib/seo';
 
 import { StickyNav } from './sticky-nav';
+
+export const metadata: Metadata = {
+  title: 'What is a VPN? An In-Depth Guide',
+  description:
+    'Learn what a VPN is, how it works, and why you should use one. A practical guide to encryption, IP masking, public WiFi safety, and choosing the right provider.',
+  alternates: { canonical: '/what-is-a-vpn' },
+  openGraph: {
+    title: 'What is a VPN? An In-Depth Guide',
+    description:
+      'Encryption, IP masking, and public WiFi safety — explained simply.',
+    url: `${SITE_URL}/what-is-a-vpn`,
+    type: 'article',
+  },
+};
 
 const articleSections = [
   { id: 'introduction', title: 'What is a VPN?' },
@@ -11,9 +27,78 @@ const articleSections = [
   { id: 'choosing-vpn', title: 'Choosing the Right VPN' },
 ];
 
+const articleJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'What is a VPN? An In-Depth Guide',
+  description:
+    'Learn what a VPN is, how it works, and why you should use one. Covers encryption, IP masking, public WiFi safety, and choosing the right provider.',
+  url: `${SITE_URL}/what-is-a-vpn`,
+  inLanguage: 'en-US',
+  author: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL },
+  publisher: {
+    '@type': 'Organization',
+    name: SITE_NAME,
+    url: SITE_URL,
+    logo: { '@type': 'ImageObject', url: `${SITE_URL}/zee_logo.png` },
+  },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE_URL}/what-is-a-vpn` },
+};
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is a VPN?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text:
+          'A VPN is a service that creates a secure, encrypted connection between your device and the internet. It routes your traffic through a server operated by the VPN provider, masking your real IP address and encrypting your data so ISPs, networks, and third parties cannot read it.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How does a VPN work?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text:
+          'A VPN works by authenticating your client with a VPN server, creating an encrypted tunnel between your device and that server, encrypting your traffic with standards like AES-256, and replacing your source IP with the server’s IP so your location and identity are hidden.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Why should I use a VPN?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text:
+          'A VPN protects your privacy from ISPs and trackers, secures your traffic on public WiFi, helps bypass censorship and geo-restrictions, and can prevent price discrimination on sites that vary prices by location.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I choose the right VPN?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text:
+          'Look for strong encryption (AES-256), a strict no-logs policy, a kill switch, fast server performance, a geographically diverse server network, easy-to-use apps across devices, and reliable customer support.',
+      },
+    },
+  ],
+};
+
 export default function WhatIsAVPNPage() {
   return (
     <div className="container pb-16 pt-[calc(5rem+4.5rem)] lg:pb-24 lg:pt-[calc(6rem+4.5rem)]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       <div className="flex flex-col lg:flex-row lg:gap-12">
         <aside className="w-full lg:w-1/4 mb-8 lg:mb-0">
           <StickyNav sections={articleSections} />
