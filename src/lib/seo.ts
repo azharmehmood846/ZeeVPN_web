@@ -1,7 +1,20 @@
 // Central SEO/GEO/AEO configuration.
-// Replace SITE_URL with the production origin before launching.
+//
+// SITE_URL resolution order:
+//   1. NEXT_PUBLIC_SITE_URL (set this in Vercel project settings → Environment Variables)
+//   2. VERCEL_PROJECT_PRODUCTION_URL (auto-injected by Vercel on production deploys)
+//   3. Fallback placeholder — update before launch if not deploying to Vercel.
+//
+// This ensures canonicals, sitemap, robots, and JSON-LD always emit URLs matching
+// the real production origin instead of the placeholder.
 
-export const SITE_URL = "https://zeevpn.com";
+const resolvedSiteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : "https://zeevpn.com");
+
+export const SITE_URL = resolvedSiteUrl.replace(/\/$/, "");
 export const SITE_NAME = "Zee VPN";
 export const SITE_TAGLINE = "Free Android VPN — One Ad Unlocks Hours";
 export const SITE_DESCRIPTION =
@@ -48,3 +61,18 @@ export const WEBSITE_JSONLD = {
     url: SITE_URL,
   },
 };
+
+export function breadcrumbJsonLd(
+  crumbs: { name: string; path: string }[]
+): Record<string, unknown> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: crumbs.map((crumb, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: crumb.name,
+      item: `${SITE_URL}${crumb.path}`,
+    })),
+  };
+}

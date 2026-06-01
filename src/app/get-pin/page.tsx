@@ -3,7 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { PinForm } from "./pin-form";
 import { ListChecks, Download, Router, Play } from "lucide-react";
 
-import { SITE_NAME, SITE_URL } from "@/lib/seo";
+import { breadcrumbJsonLd, SITE_NAME, SITE_URL } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Free PIN — Unlock 6 Hours of VPN Access",
@@ -85,6 +85,17 @@ export default function GetPinPage() {
             <script
               type="application/ld+json"
               dangerouslySetInnerHTML={{ __html: JSON.stringify(howToJsonLd) }}
+            />
+            <script
+              type="application/ld+json"
+              dangerouslySetInnerHTML={{
+                __html: JSON.stringify(
+                  breadcrumbJsonLd([
+                    { name: "Home", path: "/" },
+                    { name: "Free PIN", path: "/get-pin" },
+                  ])
+                ),
+              }}
             />
             <div className="max-w-4xl mx-auto">
                 <div className="text-center">

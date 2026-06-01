@@ -79,6 +79,14 @@ export const metadata: Metadata = {
     email: false,
     telephone: false,
   },
+  // Replace placeholder strings with the real verification tokens from each console.
+  verification: {
+    google: 'REPLACE_WITH_GOOGLE_SEARCH_CONSOLE_TOKEN',
+    yandex: 'REPLACE_WITH_YANDEX_WEBMASTER_TOKEN',
+    other: {
+      'msvalidate.01': 'REPLACE_WITH_BING_WEBMASTER_TOKEN',
+    },
+  },
 };
 
 export const viewport: Viewport = {
@@ -96,6 +104,14 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <head>
+        {/* Resource hints for third-party origins hit on first paint */}
+        <link rel="preconnect" href="https://iplogs.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://iplogs.com" />
+        <link rel="preconnect" href="https://speed.cloudflare.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://speed.cloudflare.com" />
+        <link rel="dns-prefetch" href="https://images.unsplash.com" />
+        <link rel="dns-prefetch" href="https://res.cloudinary.com" />
+        <link rel="dns-prefetch" href="https://minograd.sirv.com" />
         <style>{`
           html {
             background: hsl(224 71% 4%);

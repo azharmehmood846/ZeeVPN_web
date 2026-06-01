@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { Twitter, Facebook, Linkedin } from 'lucide-react';
 
-import { SITE_URL } from '@/lib/seo';
+import { breadcrumbJsonLd, SITE_URL } from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: 'Contact Us — Support & Inquiries',
@@ -30,6 +30,17 @@ const socialLinks = [
 export default function ContactPage() {
     return (
         <div className="container pb-24 pt-[calc(6rem+4.5rem)]">
+            <script
+              type="application/ld+json"
+              dangerouslySetInnerHTML={{
+                __html: JSON.stringify(
+                  breadcrumbJsonLd([
+                    { name: 'Home', path: '/' },
+                    { name: 'Contact', path: '/contact' },
+                  ])
+                ),
+              }}
+            />
             <div className="text-center max-w-2xl mx-auto">
                 <h1 className="text-4xl md:text-5xl font-bold font-headline tracking-tight">Contact Us</h1>
                 <p className="mt-4 text-lg text-muted-foreground">

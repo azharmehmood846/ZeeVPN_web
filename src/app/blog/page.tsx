@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { blogPosts } from "@/lib/data";
-import { SITE_URL } from "@/lib/seo";
+import { breadcrumbJsonLd, SITE_URL } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Blog — Privacy & VPN Insights",
@@ -23,6 +23,17 @@ export const metadata: Metadata = {
 export default function BlogPage() {
     return (
         <div className="container pb-24 pt-[calc(6rem+4.5rem)]">
+            <script
+              type="application/ld+json"
+              dangerouslySetInnerHTML={{
+                __html: JSON.stringify(
+                  breadcrumbJsonLd([
+                    { name: "Home", path: "/" },
+                    { name: "Blog", path: "/blog" },
+                  ])
+                ),
+              }}
+            />
             <div className="text-center max-w-2xl mx-auto">
                 <h1 className="text-4xl md:text-5xl font-bold font-headline tracking-tight">From the Blog</h1>
                 <p className="mt-4 text-lg text-muted-foreground">

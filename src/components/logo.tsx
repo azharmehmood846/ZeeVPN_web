@@ -52,6 +52,9 @@ export function Logo({
       >
         Zee VPN
       </span>
+      {/* Always-readable anchor text for crawlers/screen readers when the
+          wordmark is visually collapsed (sticky-pill header state). */}
+      {!showWordmark ? <span className="sr-only">Zee VPN — Home</span> : null}
     </Link>
   );
 }

@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 
 import { CDN_IMAGES } from '@/lib/cdn-images';
-import { SITE_NAME, SITE_URL } from '@/lib/seo';
+import { breadcrumbJsonLd, SITE_NAME, SITE_URL } from '@/lib/seo';
 
 import { StickyNav } from './sticky-nav';
 
@@ -98,6 +98,17 @@ export default function WhatIsAVPNPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            breadcrumbJsonLd([
+              { name: 'Home', path: '/' },
+              { name: 'What is a VPN?', path: '/what-is-a-vpn' },
+            ])
+          ),
+        }}
       />
       <div className="flex flex-col lg:flex-row lg:gap-12">
         <aside className="w-full lg:w-1/4 mb-8 lg:mb-0">

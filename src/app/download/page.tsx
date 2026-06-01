@@ -5,7 +5,7 @@ import { downloadPlatforms } from "@/lib/data";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
-import { SITE_NAME, SITE_URL } from "@/lib/seo";
+import { breadcrumbJsonLd, SITE_NAME, SITE_URL } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Download Zee VPN — Free Android VPN App",
@@ -47,6 +47,17 @@ export default function DownloadPage() {
             <script
               type="application/ld+json"
               dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareJsonLd) }}
+            />
+            <script
+              type="application/ld+json"
+              dangerouslySetInnerHTML={{
+                __html: JSON.stringify(
+                  breadcrumbJsonLd([
+                    { name: "Home", path: "/" },
+                    { name: "Download", path: "/download" },
+                  ])
+                ),
+              }}
             />
             <div className="text-center max-w-2xl mx-auto">
                 <h1 className="text-4xl md:text-5xl font-bold font-headline tracking-tight">Download Zee VPN</h1>
