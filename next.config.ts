@@ -88,6 +88,14 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  async redirects() {
+    return [
+      // Routes that previously existed — 301 to a sensible destination so
+      // external links + Google's cache don't 404.
+      { source: '/contact', destination: '/', permanent: true },
+      { source: '/get-pin', destination: '/download', permanent: true },
+    ];
+  },
 };
 
 export default nextConfig;
