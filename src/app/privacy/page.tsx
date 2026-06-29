@@ -10,8 +10,8 @@ import {
 } from '@/components/legal-page-layout';
 import { breadcrumbJsonLd, SITE_URL } from '@/lib/seo';
 
-const EFFECTIVE_DATE = '01 Jun 2026';
-const LAST_UPDATED = '01 Jun 2026';
+const EFFECTIVE_DATE = '29 Jun 2026';
+const LAST_UPDATED = '29 Jun 2026';
 const COMPANY = 'ONION TECH LIMITED';
 const ADDRESS = '13 Freeland Park Lytchett House, Wareham Road, Poole, England, BH16 6FA';
 const CONTACT = 'hi@zeevpn.com';
@@ -79,6 +79,30 @@ export default function PrivacyPolicyPage() {
           </p>
         }
       >
+        <LegalCallout>
+          <p className="text-foreground/95">
+            <strong>VPN service disclosure.</strong> ZeeVPN is a virtual
+            private network (VPN) app, and providing a VPN is its{' '}
+            <strong>core functionality</strong>. To deliver it, the App uses
+            Android&apos;s{' '}
+            <code className="rounded bg-white/[0.04] px-1.5 py-0.5 text-[0.85em] text-foreground/85">VpnService</code>{' '}
+            API to establish a secure, device-level tunnel between your device
+            and a remote server we operate or contract for. While you are
+            connected, your device&apos;s internet traffic is routed through
+            this tunnel and{' '}
+            <strong>encrypted from your device to the VPN tunnel endpoint</strong>.
+          </p>
+          <p className="mt-3 text-muted-foreground">
+            ZeeVPN does <strong>not</strong> redirect or manipulate traffic
+            from other apps on your device for monetization; does{' '}
+            <strong>not</strong> inject, modify, or insert advertising into the
+            traffic carried through the tunnel; and does <strong>not</strong>{' '}
+            route, share, or resell your device&apos;s bandwidth to third
+            parties. We do not collect personal or sensitive user data without
+            the prominent disclosure and consent described in this Policy.
+          </p>
+        </LegalCallout>
+
         <LegalSection number="01" id="who-we-are" title="Who we are">
           <p>
             We are <strong>{COMPANY}</strong>, registered at{' '}
@@ -208,6 +232,16 @@ export default function PrivacyPolicyPage() {
               <li>
                 We do <strong>not</strong> scan, monitor, or share the contents
                 of your VPN traffic for advertising purposes.
+              </li>
+              <li>
+                We do <strong>not</strong> redirect, intercept, or manipulate
+                traffic from other apps on your device for monetization, and we
+                do <strong>not</strong> inject advertising into your VPN
+                traffic.
+              </li>
+              <li>
+                We do <strong>not</strong> route, share, or resell your
+                device&apos;s bandwidth to other users or third parties.
               </li>
             </ul>
           </LegalSubsection>
@@ -437,7 +471,8 @@ export default function PrivacyPolicyPage() {
           <p>
             We use industry-standard technical and organizational measures to
             protect personal data, including encryption in transit (TLS),
-            encrypted VPN tunnels, access controls, and audit logging. No
+            encryption of traffic from your device to the VPN tunnel endpoint,
+            access controls, and audit logging. No
             internet service is 100% secure; we cannot guarantee absolute
             security and you use the Service at your own risk.
           </p>

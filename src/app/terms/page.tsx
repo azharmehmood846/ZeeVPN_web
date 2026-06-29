@@ -8,8 +8,8 @@ import {
 } from '@/components/legal-page-layout';
 import { breadcrumbJsonLd, SITE_URL } from '@/lib/seo';
 
-const EFFECTIVE_DATE = '01 Jun 2026';
-const LAST_UPDATED = '01 Jun 2026';
+const EFFECTIVE_DATE = '29 Jun 2026';
+const LAST_UPDATED = '29 Jun 2026';
 const COMPANY = 'ONION TECH LIMITED';
 const ADDRESS = '13 Freeland Park Lytchett House, Wareham Road, Poole, England, BH16 6FA';
 const CONTACT = 'hi@zeevpn.com';
@@ -94,11 +94,24 @@ export default function TermsAndConditionsPage() {
       >
         <LegalSection number="01" id="about" title="About the Service">
           <p>
-            ZeeVPN is a virtual private network application that routes your
-            internet traffic through encrypted tunnels to servers we operate or
-            contract for. The Service is provided &ldquo;as is&rdquo; and may
-            include free and paid features, advertising, and reward mechanics
-            described below.
+            ZeeVPN is a virtual private network (VPN) application, and providing
+            a VPN is its <strong>core functionality</strong>. The App uses
+            Android&apos;s <strong>VpnService</strong> API to establish a
+            secure, device-level tunnel between your device and a server we
+            operate or contract for, and routes your internet traffic through
+            that tunnel. Data carried between your device and the VPN tunnel
+            endpoint is <strong>encrypted</strong>. The Service is provided
+            &ldquo;as is&rdquo; and may include free and paid features,
+            advertising, and reward mechanics described below.
+          </p>
+          <p className="mt-4">
+            ZeeVPN does <strong>not</strong> redirect or manipulate traffic
+            from other apps on your device for monetization, does{' '}
+            <strong>not</strong> inject or modify advertising within the traffic
+            carried through the tunnel, and does <strong>not</strong> route,
+            share, or resell your bandwidth to third parties. We comply with the
+            Google Play <strong>VpnService</strong> policy and the Google Play{' '}
+            Developer Program Policies.
           </p>
         </LegalSection>
 
@@ -274,7 +287,8 @@ export default function TermsAndConditionsPage() {
           title="Connection, logging, and no guarantee of anonymity"
         >
           <p>
-            The Service routes your traffic through tunnels but{' '}
+            The Service routes your traffic through an encrypted tunnel between
+            your device and the VPN endpoint, but{' '}
             <strong>does not make you anonymous</strong>. Your activity may
             still be visible to the websites and services you connect to, to
             your ISP (in the form of encrypted VPN traffic), and to any party
